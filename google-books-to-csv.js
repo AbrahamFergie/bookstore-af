@@ -1,4 +1,4 @@
-require('.env').config();
+require('dotenv').config();
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 const fs = require('fs')
 const URL = require('url')
@@ -71,7 +71,7 @@ for(let n=200; n; n--){
 
 Promise.all(googleBooksApiRequests.map(getBooks)).then(() => {
   sql.end()
-  console.log('done')
+  console.log('is this working?')
 }).catch(error => {
   console.log(error)
   process.exit(1);
