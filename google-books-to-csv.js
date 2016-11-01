@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('.env').config();
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 const fs = require('fs')
 const URL = require('url')

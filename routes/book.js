@@ -8,5 +8,5 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-  database.createBook(req.body.book)
+  database.createBook(req.body.books)
 })

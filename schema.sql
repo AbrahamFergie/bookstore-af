@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS user;
+
 CREATE TABLE "user" (
 "id"  SERIAL ,
 "username" VARCHAR ,
@@ -5,6 +7,8 @@ CREATE TABLE "user" (
 "admin" BOOLEAN DEFAULT 'False' ,
 PRIMARY KEY ("id")
 );
+
+DROP TABLE IF EXISTS cart;
 
 CREATE TABLE "cart" (
 "cart_id"  SERIAL ,
@@ -14,40 +18,43 @@ CREATE TABLE "cart" (
 KEY ("cart_id")
 );
 
-CREATE TABLE "book" (
+DROP TABLE IF exists book;
+
+CREATE TABLE "books" (
 "id"  SERIAL ,
+"description" VARCHAR ,
 "title" VARCHAR ,
 "img" VARCHAR ,
 PRIMARY KEY ("id")
 );
 
-CREATE TABLE "bookGenre" (
+CREATE TABLE "book_genres" (
 "book_id"  SERIAL ,
 "genre_id" INTEGER ,
 PRIMARY KEY ("book_id")
 );
 
-CREATE TABLE "bookAuthor" (
+CREATE TABLE "book_authors" (
 "book_id"  SERIAL ,
 "author_id" INTEGER ,
 PRIMARY KEY ("book_id")
 );
 
-CREATE TABLE "author" (
+CREATE TABLE "authors" (
 "id"  SERIAL ,
 "name" VARCHAR ,
 PRIMARY KEY ("id")
 );
 
-CREATE TABLE "genre" (
+CREATE TABLE "genres" (
 "id"  SERIAL ,
 "name" VARCHAR ,
 PRIMARY KEY ("id")
 );
 
-ALTER TABLE "cart" ADD FOREIGN KEY ("book_id") REFERENCES "book" ("id");
-ALTER TABLE "cart" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-ALTER TABLE "book" ADD FOREIGN KEY ("id") REFERENCES "bookAuthor" ("book_id");
-ALTER TABLE "book" ADD FOREIGN KEY ("id") REFERENCES "bookGenre" ("book_id");
-ALTER TABLE "bookGenre" ADD FOREIGN KEY ("genre_id") REFERENCES "genre" ("id");
-ALTER TABLE "bookAuthor" ADD FOREIGN KEY ("author_id") REFERENCES "author" ("id");
+ALTER TABLE "cart" ADD FOREIGN KEY ("books_id") REFERENCES "books" ("id");
+ALTER TABLE "cart" ADD FOREIGN KEY ("users_id") REFERENCES "users" ("id");
+ALTER TABLE "books" ADD FOREIGN KEY ("id") REFERENCES "book_authors" ("books_id");
+ALTER TABLE "books" ADD FOREIGN KEY ("id") REFERENCES "book_genres" ("book_id");
+ALTER TABLE "book_genres" ADD FOREIGN KEY ("genres_id") REFERENCES "genres" ("id");
+ALTER TABLE "book_authors" ADD FOREIGN KEY ("authors_id") REFERENCES "authors" ("id");
