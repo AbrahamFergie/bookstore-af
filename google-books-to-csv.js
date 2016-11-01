@@ -71,7 +71,7 @@ for(let n=200; n; n--){
 
 Promise.all(googleBooksApiRequests.map(getBooks)).then(() => {
   sql.end()
-  console.log('done')
+  console.log('is this working?')
 }).catch(error => {
   console.log(error)
   process.exit(1);

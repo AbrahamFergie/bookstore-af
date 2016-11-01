@@ -1,0 +1,5 @@
+insert into "books" ("description", "image", "title") values ('Building brands through integrated marketing is an approach being used by all top-level marketing strategists. The result of a series of papers presented at the eleventh annual Advertising and Consumer Psychology Conference held in Chicago, this volume brings together researchers and professionals whose efforts focus on integrating the various persuasive tools of marketing. It goes beyond case studies of the use of integrated marketing to look at how integrated communication actually works on achieving optimal effects on the various audiences for products.', 'http://books.google.com/books/content?id=8uPMCDvdhocC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 'Integrated Communication');
+insert into "authors" ("name") values ('Esther Thorson');
+INSERT INTO book_authors(book_id, author_id) SELECT currval('books_id_seq'), currval('authors_id_seq');
+insert into "authors" ("name") values ('Jeri Moore');
+INSERT INTO book_authors(book_id, author_id) SELECT currval('books_id_seq'), currval('authors_id_seq');

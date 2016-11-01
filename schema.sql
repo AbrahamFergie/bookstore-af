@@ -1,53 +1,68 @@
-CREATE TABLE "user" (
-"id"  SERIAL ,
-"username" VARCHAR ,
-"password" VARCHAR ,
-"admin" BOOLEAN DEFAULT 'False' ,
-PRIMARY KEY ("id")
+DROP DATABASE IF EXISTS booky;
+CREATE DATABASE booky;
+
+\c booky;
+
+DROP TABLE IF EXISTS carts;
+
+CREATE TABLE carts (
+  cart_id  SERIAL ,
+  book_id INTEGER NOT NULL ,
+  user_id INTEGER NOT NULL ,
+  quantity INTEGER NOT NULL
 );
 
-CREATE TABLE "cart" (
-"cart_id"  SERIAL ,
-"book_id" INTEGER ,
-"user_id" INTEGER ,
-"quantity" INTEGER ,
-KEY ("cart_id")
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+  id  SERIAL PRIMARY KEY ,
+  username VARCHAR ,
+  password VARCHAR ,
+  admin BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE "book" (
-"id"  SERIAL ,
-"title" VARCHAR ,
-"img" VARCHAR ,
-PRIMARY KEY ("id")
+DROP TABLE IF EXISTS books;
+
+CREATE TABLE books (
+  id  SERIAL PRIMARY KEY,
+  description VARCHAR,
+  image_url VARCHAR(255) NOT NULL,
+  title VARCHAR ,
+  currval INTEGER
 );
 
-CREATE TABLE "bookGenre" (
-"book_id"  SERIAL ,
-"genre_id" INTEGER ,
-PRIMARY KEY ("book_id")
+DROP TABLE IF EXISTS book_genres;
+
+CREATE TABLE book_genres (
+  book_id  SERIAL ,
+  genre_id INTEGER NOT NULL
 );
 
-CREATE TABLE "bookAuthor" (
-"book_id"  SERIAL ,
-"author_id" INTEGER ,
-PRIMARY KEY ("book_id")
+DROP TABLE IF EXISTS book_authors;
+
+CREATE TABLE book_authors (
+  book_id  SERIAL ,
+  author_id INTEGER NOT NULL
 );
 
-CREATE TABLE "author" (
-"id"  SERIAL ,
-"name" VARCHAR ,
-PRIMARY KEY ("id")
+DROP TABLE IF EXISTS authors;
+
+CREATE TABLE authors (
+  id  SERIAL PRIMARY KEY ,
+  name VARCHAR
 );
 
-CREATE TABLE "genre" (
-"id"  SERIAL ,
-"name" VARCHAR ,
-PRIMARY KEY ("id")
+DROP TABLE IF EXISTS genres;
+
+CREATE TABLE genres (
+  id  SERIAL PRIMARY KEY,
+  name VARCHAR ,
+  currval INTEGER
 );
 
-ALTER TABLE "cart" ADD FOREIGN KEY ("book_id") REFERENCES "book" ("id");
-ALTER TABLE "cart" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-ALTER TABLE "book" ADD FOREIGN KEY ("id") REFERENCES "bookAuthor" ("book_id");
-ALTER TABLE "book" ADD FOREIGN KEY ("id") REFERENCES "bookGenre" ("book_id");
-ALTER TABLE "bookGenre" ADD FOREIGN KEY ("genre_id") REFERENCES "genre" ("id");
-ALTER TABLE "bookAuthor" ADD FOREIGN KEY ("author_id") REFERENCES "author" ("id");
+ALTER TABLE carts ADD FOREIGN KEY (book_id) REFERENCES books (id);
+ALTER TABLE carts ADD FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE books ADD FOREIGN KEY (id) REFERENCES book_authors (book_id);
+ALTER TABLE books ADD FOREIGN KEY (id) REFERENCES book_genres (book_id);
+ALTER TABLE book_genres ADD FOREIGN KEY (genre_id) REFERENCES genres (id);
+ALTER TABLE book_authors ADD FOREIGN KEY (author_id) REFERENCES authors (id);
