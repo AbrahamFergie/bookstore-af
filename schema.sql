@@ -6,7 +6,7 @@ CREATE DATABASE booky;
 DROP TABLE IF EXISTS carts;
 
 CREATE TABLE carts (
-  cart_id  SERIAL ,
+  id  SERIAL PRIMARY KEY,
   book_id INTEGER NOT NULL ,
   user_id INTEGER NOT NULL ,
   quantity INTEGER NOT NULL
@@ -16,8 +16,8 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   id  SERIAL PRIMARY KEY ,
-  username VARCHAR ,
-  password VARCHAR ,
+  username VARCHAR NOT NULL,
+  password VARCHAR NOT NULL,
   admin BOOLEAN DEFAULT FALSE
 );
 
@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS books;
 
 CREATE TABLE books (
   id  SERIAL PRIMARY KEY,
-  description VARCHAR,
+  description VARCHAR NOT NULL,
   image_url VARCHAR(255) NOT NULL,
-  title VARCHAR ,
-  currval INTEGER
+  title VARCHAR NOT NULL,
+  currval INTEGER NOT NULL
 );
 
 DROP TABLE IF EXISTS book_genres;
@@ -49,15 +49,15 @@ DROP TABLE IF EXISTS authors;
 
 CREATE TABLE authors (
   id  SERIAL PRIMARY KEY ,
-  name VARCHAR
+  name VARCHAR NOT NULL
 );
 
 DROP TABLE IF EXISTS genres;
 
 CREATE TABLE genres (
   id  SERIAL PRIMARY KEY,
-  name VARCHAR ,
-  currval INTEGER
+  name VARCHAR NOT NULL,
+  currval INTEGER NOT NULL
 );
 
 ALTER TABLE carts ADD FOREIGN KEY (book_id) REFERENCES books (id);
