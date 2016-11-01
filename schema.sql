@@ -6,7 +6,7 @@ CREATE DATABASE booky;
 DROP TABLE IF EXISTS carts;
 
 CREATE TABLE carts (
-  cart_id  SERIAL ,
+  id  SERIAL PRIMARY KEY,
   book_id INTEGER NOT NULL ,
   user_id INTEGER NOT NULL ,
   quantity INTEGER NOT NULL
