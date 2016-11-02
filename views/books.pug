@@ -7,7 +7,8 @@ block content
         tr
           th
           th Title
-          th Author 
+          th Author
+          th Genre
           th Description
       tbody
         for book in books
@@ -19,6 +20,9 @@ block content
             td
               for author in book.authors
                 li.list-unstyled= author.name
+            td
+              for genre in book.genres
+                li.list-unstyled= genre.name
             td
               p= book.description
 

@@ -2,15 +2,13 @@ const express = require('express')
 const router = express.Router()
 const db = require('../database')
 
+
 // INDEX
 router.get('/', (req, res) => {
   let page = ( parseInt( req.query.page, 10 ) ) || 1
   db.getAllBooks(page)
     .then(books => {
-      res.render('books', {
-        books: books,
-        page: page
-      })
+      res.render('books', { books, page })
     })
     .catch(error => {
       res.render('error', {error})
