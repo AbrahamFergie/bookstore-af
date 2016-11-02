@@ -1,0 +1,35 @@
+extends layout
+
+block content
+
+  if books.length > 0
+    table.table-striped
+      thead.h2
+        tr
+          th
+          th Title
+          th Author
+          th Description
+      tbody
+        for book in books
+          tr
+            td
+              img(src=book.image)
+            td.h4
+              a(href="books/"+book.id)=book.title
+            td
+              for author in book.authors
+                li.list-unstyled= author.name
+            td
+              p= book.description
+
+
+  else
+
+      span Sorry, I can't find any result for&nbsp;"
+      span= search
+      span "&nbsp;when searching.
+  div.pager
+    if page > 1
+      a.btn.btn-default(href=`/search/?page=${page - 1}`) &laquo; Previous
+    a.btn.btn-default(href='/search/' + (page + 1) + '?q='+ search  ) Next &raquo;
