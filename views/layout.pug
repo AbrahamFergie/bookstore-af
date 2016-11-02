@@ -14,17 +14,21 @@ html
   nav.navbar.navbar-default
     .container-fluid
       .navbar-header
-        a.navbar-brand(href='#') WebSiteName
+        a.navbar-brand(href='#') Booky The Bookstore!
           img(alt='Brand', src='../images/creepyBook.jpg' id='nav-bar-img')
       ul.nav.navbar-nav.pagination.pagination-lg
         li.active
-          a(href='#') Home
+          a(href='/') Home
         li
-          a(href='#') Page 1
+          a(href='/books') Booklist
         li
-          a(href='#') Page 2
-        li
-          a(href='#') Page 3
+          a(href='/books/new') Add Book
+
+          form.navbar-form.navbar-right(action='/search', method='get')
+                  .form-group
+                    input.form-control(type='text', name="q" placeholder='Search by Title or Author')
+                  button.btn.btn-default(type='submit') Submit
+
 
 
 

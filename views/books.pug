@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+    table.table-striped
+      thead.h2
+        tr
+          th
+          th Title
+          th Author 
+          th Description
+      tbody
+        for book in books
+          tr
+            td
+              img(src=book.image)
+            td.h4
+              a(href="books/"+book.id)=book.title
+            td
+              for author in book.authors
+                li.list-unstyled= author.name
+            td
+              p= book.description
+
+    div.pager
+      if page > 1
+        a.btn.btn-default(href=`?page=${page - 1}`) &laquo; Previous
+      a.btn.btn-default(href=`?page=${page + 1}`) Next &raquo;
