@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1.h1.text-center= book.title
+  
+  img.img-rounded(src=book.image)
+
+  h3.h3 Description
+  p.lead= book.description
+
+  h3.h3 Authors
+  ul.list-unstyled
+    for author in book.authors
+      li= author.name
+  span
+    a.btn.btn-default(href=`/books/${book.id}/delete`) Delete This Book
+  span
+    a.btn.btn-default(href=`/books/${book.id}/edit`) Edit This Book
