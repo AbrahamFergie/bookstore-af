@@ -17,3 +17,8 @@ a {
 .newbook {
   padding-right: 70%;
 }
+#nav-bar-img {
+  max-height: 275%;
+  max-width: 275%;
+
+}
