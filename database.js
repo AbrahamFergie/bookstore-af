@@ -35,6 +35,16 @@ const getBookByIdWithAuthors = (id) => {
   })
 }
 
+const getBookByIdWithGenres = (id) => {
+  return Promise.all([
+      getBookById(id),
+    ]).then(details => {
+      const book = details[0]
+      book.genres = details[1]
+      return book
+    })
+}
+
 // const getAuthorsByBookId = (id) => {
 //   const sql = `
 //     SELECT *
@@ -65,6 +75,21 @@ const getAuthorsByBookId = (id) => {
   return db.manyOrNone(sql, variables)
 }
 
+const getGenresByBookId = (id) => {
+  const sql = `
+  SELECT *
+   FROM
+    genres AS g
+   JOIN
+    book_genres
+   ON
+    book_genres.genre_id=a.id
+   WHERE
+    book_genres.book_id=${id}`
+  const variables = [id]
+  return db.manyOrNone(sql, variables)
+}
+
 const findBooks = (query, page = 1) => {
   const offset = (page-1) * 10
   const sql = `
@@ -80,16 +105,21 @@ const findBooks = (query, page = 1) => {
    authors
   ON
     book_authors.author_id = authors.id
-    WHERE LOWER(title) LIKE $1
+    WHERE LOWER(title) LIKE ${query}
+  JOIN
+   genres
+  ON
+    book_genres.genre_id = genres.id
+    WHERE LOWER(title) LIKE ${query}
   OR
-   LOWER(description) LIKE $1
+   LOWER(description) LIKE ${query}
   OR
-   LOWER(authors.name) LIKE $1
+   LOWER(authors.name) LIKE ${query}
   LIMIT 10 OFFSET $2`
   const variables = [
     '%'+query.replace(/\s+/,'%').toLowerCase()+'%', offset
   ]
-  return db.manyOrNone(sql, variables).then(addAuthorsToBooks)
+  return db.manyOrNone(sql, variables).then(addAuthorsToBooks, addGenresToBooks)
 }
 
 const addAuthorsToBooks = books => {
@@ -102,6 +132,18 @@ const addAuthorsToBooks = books => {
     return books
   })
 }
+
+const addGenresToBooks = books => {
+  return getGenresForBooks(books).then(genres => {
+    books.forEach(book => {
+      book.genres = genres.filter(genres =>
+      genre.book_id === book.id
+      )
+    })
+    return books
+  })
+}
+
 
 const getAuthorsForBooks = (books) => {
   if (books.length === 0) return Promise.resolve( [])
@@ -122,6 +164,25 @@ const getAuthorsForBooks = (books) => {
   return db.manyOrNone(sql, [bookIds])
 }
 
+const getGenresForBooks = (books) => {
+  if (books.length === 0) return Promise.resolve( [])
+  const bookIds = books.map(book => book.id)
+  const sql = `
+    SELECT
+      genres.*,
+      book_genres.book_id
+    FROM
+      genres
+    JOIN
+      book_genres
+    ON
+      book_genres.genre_id = genres.id
+    WHERE
+      genres.id IN ($1:csv)`
+
+  return db.manyOrNone(sql, [bookIds])
+}
+
 const createBook = (attributes) => {
   const sql = `
     INSERT INTO
@@ -138,13 +199,16 @@ const createBook = (attributes) => {
   ]
   const insertBookQuery = db.one(sql, variables)
   const insertAuthorQuery = createAuthor(attributes.author)
+  const insertGenreQuery = createGenre(attributes.genre)
   return Promise.all([
     insertBookQuery,
-    insertAuthorQuery
+    insertAuthorQuery,
+    insertGenreQuery
   ])
     .then(results => {
       const book = results[0]
       const author = results[1]
+      const genre = results[2]
       return associateBookAndAuthor(book, author)
         .then(() => book)
     })
@@ -161,6 +225,17 @@ const associateBookAndAuthor = (book, author) => {
   return db.none(sql, variables)
 }
 
+const associateBookAndGenre = (book, genre) => {
+  const sql = `
+    INSERT INTO
+      book_genres(book_id, genre_id)
+    VALUES
+      ($1, $2)
+  `
+  const variables = [book.id, genre.id]
+  return db.none(sql, variables)
+}
+
 const createAuthor = (authorName) => {
   const sql = `
     INSERT INTO
@@ -174,12 +249,26 @@ const createAuthor = (authorName) => {
   return db.one(sql, variables)
 }
 
+const createGenre = (genreName) => {
+  const sql = `
+    INSERT INTO
+      genres (name)
+    VALUES
+      ($1)
+    RETURNING
+      *
+  `
+  const variables = [genreName]
+  return db.one(sql, variables)
+}
+
+
 const deleteBook = (bookIds) => {
   const sql = `
     DELETE FROM
       books
     WHERE
-      id=$1
+      id=${id}
   `
   const variables = [bookIds]
   return db.none(sql, variables)

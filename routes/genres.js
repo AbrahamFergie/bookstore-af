@@ -4,12 +4,12 @@ var booky = require('../booky');
 
 //method that adds an author to the database(booky)
 router.post('/', function(req, res) {
-  booky.createAuthor(re.body.author)
+  booky.createGenres(re.body.genres)
     .catch(function(error) {
       res.status(500).send(error)
     })
-    .then(function(author) {
-      res.redirect('/author/'+author.id)
+    .then(function(genre) {
+      res.redirect('/genres/'+genres.id)
     })
 });
 
@@ -25,3 +25,6 @@ router.get('/:bookId', function(req, res) {
       res.status(500).send(error)
     })
 });
+
+
+module.exports = router
