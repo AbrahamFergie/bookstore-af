@@ -11,9 +11,7 @@ router.get('/', (req, res) => {
     db.findBooks(req.query.q) : db.getAllBooks(page)
 
   sqlQuery.then(books => {
-      res.render('search', {
-        books: books,
-        page: page,
+      res.render('search', {books, page,
         search: req.query.q
       })
     })

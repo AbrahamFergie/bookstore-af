@@ -4,13 +4,17 @@ const db = pgp({database: 'booky'})
 const getAllBooks = (page = 1) => {
   const offset = (page-1) * 10
   const sql =`
-  SELECT *
+  SELECT
+    *
   FROM
     books
-  LIMIT 10 OFFSET $1
+  JOIN
+    book_genres
+  ON
+    book_genres.book_id = books.id
   `
-  const variables = [offset]
-  return db.manyOrNone(sql, variables).then(addAuthorsToBooks)
+  const variables = [] // [offset]
+  return db.manyOrNone(sql, variables).then(addAuthorsToBooks).then(addGenresToBooks)
 }
 
 const getBookById = (id) => {
@@ -38,6 +42,7 @@ const getBookByIdWithAuthors = (id) => {
 const getBookByIdWithGenres = (id) => {
   return Promise.all([
       getBookById(id),
+      getGenresByBookId(id)
     ]).then(details => {
       const book = details[0]
       book.genres = details[1]
@@ -70,7 +75,7 @@ const getAuthorsByBookId = (id) => {
    ON
     book_authors.author_id=a.id
    WHERE
-    book_authors.book_id=${id}`
+    book_authors.book_id= ${id}`
   const variables = [id]
   return db.manyOrNone(sql, variables)
 }
@@ -83,7 +88,7 @@ const getGenresByBookId = (id) => {
    JOIN
     book_genres
    ON
-    book_genres.genre_id=a.id
+    book_genres.genre_id=g.id
    WHERE
     book_genres.book_id=${id}`
   const variables = [id]
@@ -93,33 +98,44 @@ const getGenresByBookId = (id) => {
 const findBooks = (query, page = 1) => {
   const offset = (page-1) * 10
   const sql = `
-  SELECT DISTINCT
-    books.*
-  FROM
-    books
-  JOIN
-    book_authors
-  ON
-    book_authors.book_id = books.id
-  JOIN
-   authors
-  ON
-    book_authors.author_id = authors.id
-    WHERE LOWER(title) LIKE ${query}
-  JOIN
-   genres
-  ON
-    book_genres.genre_id = genres.id
-    WHERE LOWER(title) LIKE ${query}
-  OR
-   LOWER(description) LIKE ${query}
-  OR
-   LOWER(authors.name) LIKE ${query}
-  LIMIT 10 OFFSET $2`
+    SELECT DISTINCT
+      books.*
+    FROM
+      books
+    JOIN
+      book_authors
+    ON
+      book_authors.book_id = books.id
+    JOIN
+      authors
+    ON
+      book_authors.author_id = authors.id
+    JOIN
+      book_genres
+    ON
+      book_genres.book_id = books.id
+    JOIN
+      genres
+    ON
+      book_genres.genre_id = genres.id
+    WHERE
+      LOWER(books.title) LIKE $1
+    OR
+      LOWER(books.description) LIKE $1
+    OR
+      LOWER(authors.name) LIKE $1
+    OR
+      LOWER(genres.name) LIKE $1
+    LIMIT
+      10
+    OFFSET
+      $2
+  `
   const variables = [
-    '%'+query.replace(/\s+/,'%').toLowerCase()+'%', offset
+    '%'+query.replace(/\s+/,'%').toLowerCase()+'%',
+    offset,
   ]
-  return db.manyOrNone(sql, variables).then(addAuthorsToBooks, addGenresToBooks)
+  return db.manyOrNone(sql, variables).then(addAuthorsToBooks).then(addGenresToBooks)
 }
 
 const addAuthorsToBooks = books => {
@@ -136,8 +152,8 @@ const addAuthorsToBooks = books => {
 const addGenresToBooks = books => {
   return getGenresForBooks(books).then(genres => {
     books.forEach(book => {
-      book.genres = genres.filter(genres =>
-      genre.book_id === book.id
+      book.genres = genres.filter(genre =>
+        genre.book_id === book.id
       )
     })
     return books
@@ -178,7 +194,8 @@ const getGenresForBooks = (books) => {
     ON
       book_genres.genre_id = genres.id
     WHERE
-      genres.id IN ($1:csv)`
+      genres.id IN ($1:csv)
+  `
 
   return db.manyOrNone(sql, [bookIds])
 }
@@ -209,19 +226,23 @@ const createBook = (attributes) => {
       const book = results[0]
       const author = results[1]
       const genre = results[2]
-      return associateBookAndAuthor(book, author)
+      return associateBookAndAuthor(book, author, genre)
         .then(() => book)
     })
 }
 
-const associateBookAndAuthor = (book, author) => {
+const associateBookAuthorAndGenre = (book, author, genre) => {
   const sql = `
     INSERT INTO
       book_authors(book_id, author_id)
     VALUES
       ($1, $2)
+    INSERT INTO
+        book_authors(book_id, author_id)
+    VALUES
+      ($1, $3)
   `
-  const variables = [book.id, author.id]
+  const variables = [book.id, author.id, genre.id]
   return db.none(sql, variables)
 }
 
@@ -281,6 +302,8 @@ module.exports = {
   getAllBooks,
   getBookById,
   getBookByIdWithAuthors,
+  getBookByIdWithGenres,
   getAuthorsByBookId,
+  getGenresByBookId,
   findBooks
 }

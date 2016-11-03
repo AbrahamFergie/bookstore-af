@@ -37,11 +37,12 @@ router.post( '/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params
 
-  db.getBookByIdWithAuthors(id)
+  Promise.all([db.getBookByIdWithAuthors(id), db.getBookByIdWithGenres(id)])
     .then(book => {
-      res.render('details', {
+          //res.send(book)
+      res.render('books', {
         book: book
-      })
+       })
     })
     .catch(error => {
       res.render('error', {error})
