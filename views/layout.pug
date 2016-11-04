@@ -1,6 +1,7 @@
 doctype html
 html
   head
+
     title="Booky!"
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='shortcut icon' type='image/x-icon' href='./public/images/creepyBook.jpg')
@@ -11,23 +12,25 @@ html
     script(src="/javascripts/client.js")
 
   body
-  nav.navbar.navbar-default
-    .container-fluid
-      .navbar-header
-        a.navbar-brand(href='#') Booky The Bookstore!
-          img(alt='Brand', src='../images/creepyBook.jpg' id='nav-bar-img')
-      ul.nav.navbar-nav.pagination.pagination-lg
-        li.active
-          a(href='/') Home
-        li
-          a(href='/books') Booklist
-        li
-          a(href='books/new') Add Book
+    nav.navbar.navbar-default(id=nav)
+      div(id=homepage)
 
-          form.navbar-form.navbar-right(action='/search', method='get')
-                  .form-group
-                    input.form-control(type='text', name="q" placeholder='Search by Title or Author')
-                  button.btn.btn-default(type='submit') Submit
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#') Booky The Bookstore!
+            img(alt='Brand', src='../images/creepyBook.jpg' id='nav-bar-img')
+        ul.nav.navbar-nav.pagination.pagination-lg
+          li.active
+            a(href='/') Home
+          li
+            a(href='/books') Booklist
+          li
+            a(href='books/new') Add Book
+
+            form.navbar-form.navbar-right(action='/search', method='get')
+                    .form-group
+                      input.form-control(type='text', name="q" placeholder='Search by Title or Author')
+                    button.btn.btn-default(type='submit') Submit
 
 
 

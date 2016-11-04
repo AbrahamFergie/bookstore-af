@@ -6,7 +6,6 @@ block content
     table.table-striped
       thead.h2
         tr
-          th
           th Title
           th Author
           th Genre
@@ -20,10 +19,10 @@ block content
               a(href="books/"+book.id)=book.title
             td
               for author in book.authors
-                li.list-unstyled=author.name
+                li.list=author.name
             td
               for genre in book.genres
-                li.list-unstyled=genre.name
+                li.list=genre.name
             td
               p= book.description
 

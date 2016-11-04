@@ -1,13 +1,24 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("https://cdn.wallpaper.com/main/05_book_1.jpg");
+  background-size: 100% 350%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
+h1 {
+color: #1b99a3;
+}
 a {
   color: #00B7FF;
 }
 .jumbotron {
+  box-shadow: 10px 10px 50px 20px #203737 inset;
+  background-color: rgba(255, 255, 255, .8);
   background-image: url("creepyBook.jpg");
+}
+#nav {
+  background-color: rgba(255, 255, 255, .8);
 }
 
 .invisible {
@@ -18,7 +29,10 @@ a {
   padding-right: 70%;
 }
 #nav-bar-img {
-  max-height: 275%;
-  max-width: 275%;
-
+  max-height: 285%;
+  max-width: 285%;
+}
+#homepage {
+  z-index: -1;
+  position:absolute;
 }
