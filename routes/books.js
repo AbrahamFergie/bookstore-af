@@ -18,12 +18,10 @@ router.get('/', (req, res) => {
 
 // NEW
 router.get('/new', (req, res) => {
-  res.render('books/new', {
-    book: {}
-  })
+  res.render('books/new' )
 })
 
-router.post( '/', (req, res) => {
+router.post( '/new', (req, res) => {
   const { title, author, genre, description, image } = req.body
   console.log(title)
   db.createBook(title, author, genre, description, image)

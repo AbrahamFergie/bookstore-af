@@ -8,10 +8,6 @@ const getAllBooks = (page = 1) => {
     *
   FROM
     books
-  JOIN
-    book_genres
-  ON
-    book_genres.book_id = books.id
   `
   const variables = [] // [offset]
   return db.manyOrNone(sql, variables).then(addAuthorsToBooks).then(addGenresToBooks)
@@ -254,7 +250,7 @@ const associateBookWithGenre = (book, genre) => {
   return db.any(sql, [book.id, genre.id])
 }
 
-const associateBookAuthorAndGenre = (book, author, genre) => {
+//const associateBookAuthorAndGenre = (book, author, genre) => {
   // const sql = `
   //   BEGIN TRANSACTION;
   //   INSERT INTO
@@ -269,7 +265,7 @@ const associateBookAuthorAndGenre = (book, author, genre) => {
   // `
   // const variables = [book.id, author.id, genre.id]
   // return db.none(sql, variables)
-}
+//}
 
 const associateBookAndGenre = (book, genre) => {
   const sql = `
@@ -330,18 +326,27 @@ const getAuthorForBookId = (bookId) => {
       book_authors
     ON authors.id = book_authors.author_id
     WHERE
-      book_authors.book_id = $1
+      book_authors.book_id = ${bookId}
   `
+  console.log('im the error')
   return db.one(sql, [bookId])
 }
   const getGenreForBookId = (bookId) => {
   const sql = `
-    SELECT
+  SELECT
       *
-    FROM
-      authors
+  FROM
+    genres
+  JOIN
+    book_genres
+  ON
+    genres.id = book_genres.genre_id
+  WHERE
+    book_genres.book_id = ${bookId}
   `
-  return db.one(sql, variables)
+  console.log('no, im the error')
+
+  return db.one(sql)
 }
 
 const getBookWithAuthorAndGenres = (bookId) => {
@@ -362,9 +367,9 @@ const getBookWithAuthorAndGenres = (bookId) => {
 module.exports = {
   getAllBooks,
   getBookById,
-  getBookByIdWithAuthors,
-  getBookByIdWithGenres,
-  getAuthorsByBookId,
+  getBookWithAuthorAndGenres,
+  getGenreForBookId,
+  getAuthorForBookId,
   getGenresByBookId,
   createBook,
   createGenre,

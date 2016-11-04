@@ -9,6 +9,7 @@ block content
           th
           th Title
           th Author
+          th Genre
           th Description
       tbody
         for book in books
@@ -19,7 +20,10 @@ block content
               a(href="books/"+book.id)=book.title
             td
               for author in book.authors
-                li.list-unstyled= author.name
+                li.list-unstyled=author.name
+            td
+              for genre in book.genres
+                li.list-unstyled=genre.name
             td
               p= book.description
 
