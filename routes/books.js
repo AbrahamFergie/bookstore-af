@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
       res.render('books', { books, page })
     })
     .catch(error => {
+      console.log('im an error1!')
       res.render('error', {error})
     })
 })
@@ -23,29 +24,29 @@ router.get('/new', (req, res) => {
 })
 
 router.post( '/', (req, res) => {
-  const { title, author, description, image } = req.body
+  const { title, author, genre, description, image } = req.body
   console.log(title)
-  db.createBook(title, author, description, image)
+  db.createBook(title, author, genre, description, image)
     .then(book => {
-      res.redirect( './books' + book.id)
+      res.redirect('/books/' + book.id)
     })
     .catch(error => {
+      console.log('im an error2!')
       res.render('error', { error })
     })
 })
 
 // SHOW
-router.get('/:id', (req, res) => {
-  const { id } = req.params
-
-  Promise.all([db.getBookByIdWithAuthors(id), db.getBookByIdWithGenres(id)])
+router.get('/:bookId', (req, res) => {
+  const { bookId } = req.params
+  db.getBookWithAuthorAndGenres(bookId)
     .then(book => {
-          //res.send(book)
-      res.render('books', {
+      res.render('books/show', {
         book: book
        })
     })
     .catch(error => {
+      console.log('im an error3!')
       res.render('error', {error})
     })
 })

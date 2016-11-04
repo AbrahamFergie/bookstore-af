@@ -201,7 +201,7 @@ const getGenresForBooks = (books) => {
 }
 
 const createBook = (title, author, genre, description, image) => {
-    console.log('hello')
+  console.log('hello', [title, author, genre, description, image])
 
   const sql = `
     INSERT INTO
@@ -220,33 +220,55 @@ const createBook = (title, author, genre, description, image) => {
   // const insertAuthorQuery = createAuthor(author)
   // const insertGenreQuery = createGenre(genre)
   // const insertBookQuery = db.one(sql, variables)
-  return Promise.all([createAuthor(author),
-    createGenre(genre),
-    db.one(sql, variables)])
-    .then(results => {
-      const book = results[0]
-      const author = results[1]
-      const genre = results[2]
-      return associateBookAuthorAndGenre(book, author, genre)
-        .then(() => book)
+  return Promise.all([
+    createAuthor(author).catch(error => {console.log('A', error); throw error}),
+    createGenre(genre).catch(error => {console.log('B', error); throw error}),
+    db.one(sql, variables).catch(error => {console.log('C', error); throw error})
+  ])
+    .then(([author, genre, book]) => {
+      return Promise.all([
+        associateBookWithAuthor(book, author),
+        associateBookWithGenre(book, genre),
+      ]).then(() => book)
     })
+    .catch(error => {console.log('E', error); throw error})
 }
 
-const associateBookAuthorAndGenre = (book, author, genre) => {
+const associateBookWithAuthor = (book, author) => {
   const sql = `
-    BEGIN TRANSACTION;
     INSERT INTO
       book_authors(book_id, author_id)
     VALUES
-      (${book}, ${author})
-    INSERT INTO
-        book_genres(book_id, genre_id)
-    VALUES
-      (${book}, ${genre});
-    COMMIT
+      ($1, $2)
   `
-  const variables = [book.id, author.id, genre.id]
-  return db.none(sql, variables)
+  return db.any(sql, [book.id, author.id])
+}
+
+const associateBookWithGenre = (book, genre) => {
+  const sql = `
+    INSERT INTO
+      book_genres(book_id, genre_id)
+    VALUES
+      ($1, $2)
+  `
+  return db.any(sql, [book.id, genre.id])
+}
+
+const associateBookAuthorAndGenre = (book, author, genre) => {
+  // const sql = `
+  //   BEGIN TRANSACTION;
+  //   INSERT INTO
+  //     book_authors(book_id, author_id)
+  //   VALUES
+  //     ($1, $2)
+  //   INSERT INTO
+  //       book_genres(book_id, genre_id)
+  //   VALUES
+  //     (${book}, ${genre});
+  //   COMMIT
+  // `
+  // const variables = [book.id, author.id, genre.id]
+  // return db.none(sql, variables)
 }
 
 const associateBookAndGenre = (book, genre) => {
@@ -298,6 +320,42 @@ const deleteBook = (bookIds) => {
   return db.none(sql, variables)
 }
 
+const getAuthorForBookId = (bookId) => {
+  const sql = `
+    SELECT
+      *
+    FROM
+      authors
+    JOIN
+      book_authors
+    ON authors.id = book_authors.author_id
+    WHERE
+      book_authors.book_id = $1
+  `
+  return db.one(sql, [bookId])
+}
+  const getGenreForBookId = (bookId) => {
+  const sql = `
+    SELECT
+      *
+    FROM
+      authors
+  `
+  return db.one(sql, variables)
+}
+
+const getBookWithAuthorAndGenres = (bookId) => {
+  return Promise.all([
+    getBookById(bookId),
+    getAuthorForBookId(bookId),
+    getGenreForBookId(bookId),
+  ]).then(([book, author, genre]) => {
+    book.author = author
+    book.genre = genre
+    return book
+  })
+
+}
 
 
 
