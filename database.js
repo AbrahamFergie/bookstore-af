@@ -200,47 +200,50 @@ const getGenresForBooks = (books) => {
   return db.manyOrNone(sql, [bookIds])
 }
 
-const createBook = (attributes) => {
+const createBook = (title, author, genre, description, image) => {
+    console.log('hello')
+
   const sql = `
     INSERT INTO
-      books (title, description, image)
+      books (title, description, image_url)
     VALUES
       ($1, $2, $3)
     RETURNING
       *
   `
+
   const variables = [
-    attributes.title,
-    attributes.description,
-    attributes.image
+    title,
+    description,
+    image
   ]
-  const insertBookQuery = db.one(sql, variables)
-  const insertAuthorQuery = createAuthor(attributes.author)
-  const insertGenreQuery = createGenre(attributes.genre)
-  return Promise.all([
-    insertBookQuery,
-    insertAuthorQuery,
-    insertGenreQuery
-  ])
+  // const insertAuthorQuery = createAuthor(author)
+  // const insertGenreQuery = createGenre(genre)
+  // const insertBookQuery = db.one(sql, variables)
+  return Promise.all([createAuthor(author),
+    createGenre(genre),
+    db.one(sql, variables)])
     .then(results => {
       const book = results[0]
       const author = results[1]
       const genre = results[2]
-      return associateBookAndAuthor(book, author, genre)
+      return associateBookAuthorAndGenre(book, author, genre)
         .then(() => book)
     })
 }
 
 const associateBookAuthorAndGenre = (book, author, genre) => {
   const sql = `
+    BEGIN TRANSACTION;
     INSERT INTO
       book_authors(book_id, author_id)
     VALUES
-      ($1, $2)
+      (${book}, ${author})
     INSERT INTO
-        book_authors(book_id, author_id)
+        book_genres(book_id, genre_id)
     VALUES
-      ($1, $3)
+      (${book}, ${genre});
+    COMMIT
   `
   const variables = [book.id, author.id, genre.id]
   return db.none(sql, variables)
@@ -305,5 +308,8 @@ module.exports = {
   getBookByIdWithGenres,
   getAuthorsByBookId,
   getGenresByBookId,
+  createBook,
+  createGenre,
+  createAuthor,
   findBooks
 }

@@ -23,8 +23,9 @@ router.get('/new', (req, res) => {
 })
 
 router.post( '/', (req, res) => {
-  const { book } = req.body
-  db.createBook(book)
+  const { title, author, description, image } = req.body
+  console.log(title)
+  db.createBook(title, author, description, image)
     .then(book => {
       res.redirect( './books' + book.id)
     })

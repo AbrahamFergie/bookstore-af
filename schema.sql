@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS books;
 CREATE TABLE books (
   id  SERIAL PRIMARY KEY,
   description VARCHAR NOT NULL,
-  image_url VARCHAR(255) NOT NULL,
+  image_url VARCHAR(255),
   title VARCHAR NOT NULL
 );
 
@@ -48,14 +48,14 @@ DROP TABLE IF EXISTS authors;
 
 CREATE TABLE authors (
   id  SERIAL PRIMARY KEY ,
-  name VARCHAR NOT NULL UNIQUE
+  name VARCHAR NOT NULL 
 );
 
 DROP TABLE IF EXISTS genres;
 
 CREATE TABLE genres (
   id  SERIAL PRIMARY KEY,
-  name VARCHAR NOT NULL UNIQUE
+  name VARCHAR NOT NULL 
 );
 
 ALTER TABLE carts ADD FOREIGN KEY (book_id) REFERENCES books (id);

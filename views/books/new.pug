@@ -5,16 +5,16 @@ block content
 
   form.form-hortizontal(method='post', action=(book.id ? '/books/'+book.id : '/books'))
     .form-group.newbook
-      input.form-control(type='text', name='book[title]', placeholder='Title', value=`${book.title || ''}`)
+      input.form-control(type='text', name='title', placeholder='Title', value=`${book.title || ''}`)
 
     .form-group.newbook
-      input.form-control(type='text', name='book[author]', placeholder='Author')
+      input.form-control(type='text', name='author', placeholder='Author')
 
     .form-group.newbook
-      textarea.form-control(name='book[description]', placeholder='Description')= book.description
+      textarea.form-control(name='description', placeholder='Description', value= `${book.description || ''}`)
 
     .form-group.newbook
-      input.form-control(type='text', name='book[image]', placeholder='Image URL', value=`${book.image || ''}`)
+      input.form-control(type='text', name='image', placeholder='Image URL', value=`${book.image || ''}`)
 
     .form-group
       button.btn.btn-success(type='submit') Add This Book
