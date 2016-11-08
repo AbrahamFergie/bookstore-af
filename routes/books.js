@@ -38,9 +38,9 @@ router.post( '/new', (req, res) => {
 router.get('/:bookId', (req, res) => {
   const { bookId } = req.params
   db.getBookWithAuthorAndGenres(bookId)
-    .then(book => {
+    .then(bookInfo => {
       res.render('books/show', {
-        book: book
+        bookInfo
        })
     })
     .catch(error => {
