@@ -1,47 +1,50 @@
 const pgp = require('pg-promise')()
 const db = pgp({database: 'booky'})
 
-const getAllBooks = (page = 1) => {
-  const offset = (page-1) * 10
+const getAllBooks = ( page = 1 ) => {
+  const offset = ( page - 1 ) * 10
   const sql =`
   SELECT
     *
   FROM
     books
+  LIMIT 10
+  OFFSET $1
   `
-  const variables = [] // [offset]
-  return db.manyOrNone(sql, variables).then(addAuthorsToBooks).then(addGenresToBooks)
+  const variables = [offset]
+  return db.manyOrNone( sql, variables ).then( addAuthorsToBooks ).then( addGenresToBooks )
 }
 
-const getBookById = (id) => {
+const getBookById = ( id ) => {
   const sql =
-    `SELECT *
-    FROM
+    `SELECT
+      *
+     FROM
       books
     WHERE
       id=${id}`
-  const variables = [id]
-  return db.oneOrNone(sql, variables)
+  const variables = [ id ]
+  return db.oneOrNone( sql, variables )
 }
 
-const getBookByIdWithAuthors = (id) => {
+const getBookByIdWithAuthors = ( id ) => {
   return Promise.all([
-    getBookById(id),
-    getAuthorsByBookId(id)
+    getBookById( id ),
+    getAuthorsByBookId( id )
   ]).then(details => {
-    const book = details[0]
-    book.authors = details[1]
+    const book = details[ 0 ]
+    book.authors = details[ 1 ]
     return book
   })
 }
 
-const getBookByIdWithGenres = (id) => {
+const getBookByIdWithGenres = ( id ) => {
   return Promise.all([
-      getBookById(id),
-      getGenresByBookId(id)
+      getBookById( id ),
+      getGenresByBookId( id )
     ]).then(details => {
-      const book = details[0]
-      book.genres = details[1]
+      const book = details[ 0 ]
+      book.genres = details[ 1 ]
       return book
     })
 }
@@ -61,16 +64,17 @@ const getBookByIdWithGenres = (id) => {
 //   return db.manyOrNone(sql, variables)
 // }
 
-const getAuthorsByBookId = (id) => {
+const getAuthorsByBookId = ( id ) => {
   const sql = `
-  SELECT *
-   FROM
+  SELECT
+    *
+  FROM
     authors AS a
-   JOIN
+  JOIN
     book_authors
-   ON
+  ON
     book_authors.author_id=a.id
-   WHERE
+  WHERE
     book_authors.book_id= ${id}`
   const variables = [id]
   return db.manyOrNone(sql, variables)
@@ -196,8 +200,8 @@ const getGenresForBooks = (books) => {
   return db.manyOrNone(sql, [bookIds])
 }
 
-const createBook = (title, author, genre, description, image) => {
-  console.log('hello', [title, author, genre, description, image])
+const createBook = (title, author,genre,
+  description, image) => {
 
   const sql = `
     INSERT INTO
@@ -207,15 +211,11 @@ const createBook = (title, author, genre, description, image) => {
     RETURNING
       *
   `
-
   const variables = [
     title,
     description,
     image
   ]
-  // const insertAuthorQuery = createAuthor(author)
-  // const insertGenreQuery = createGenre(genre)
-  // const insertBookQuery = db.one(sql, variables)
   return Promise.all([
     createAuthor(author).catch(error => {console.log('A', error); throw error}),
     createGenre(genre).catch(error => {console.log('B', error); throw error}),
