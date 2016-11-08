@@ -1,6 +1,8 @@
 extends ../layout
 block content
-  h1 title
-  h2= bookInfo.genres
-  h1
+  h1= bookInfo.book.title
+  h3= bookInfo.book.description
+  pre= bookInfo.genres
+  img(src=bookInfo.book.image_url)
+  h2= bookInfo.authors.name
   pre= JSON.stringify(bookInfo, null, 4)

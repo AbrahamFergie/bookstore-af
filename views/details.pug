@@ -1,18 +1,18 @@
 extends layout
 
 block content
-  h1.h1.text-center= book.title
+  h1.h1.text-center= bookInfo.book.title
 
-  img.img-rounded(src=book.image)
+  img.img-rounded(src=bookInfo.book.image_url)
 
   h3.h3 Description
-  p.lead= book.description
+  p.lead= bookInfo.book.description
 
   h3.h3 Authors
   ul.list-unstyled
-    for author in book.authors
+    for author in bookInfo.authors
       li.list-unstyled= author.name
   span
-    a.btn.btn-default(href=`/books/${book.id}/delete`) Delete This Book
+    a.btn.btn-default(href=`/books/${bookInfo.book.id}/delete`) Delete This Book
   span
-    a.btn.btn-default(href=`/books/${book.id}/edit`) Edit This Book
+    a.btn.btn-default(href=`/books/${bookInfo.book.id}/edit`) Edit This Book

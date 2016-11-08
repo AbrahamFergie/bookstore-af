@@ -34,12 +34,13 @@ router.post( '/new', (req, res) => {
     })
 })
 
-// SHOW
+// details
 router.get('/:bookId', (req, res) => {
   const { bookId } = req.params
-  db.getBookWithAuthorAndGenres(bookId)
+  db.getBookWithAuthorsAndGenres(bookId)
     .then(bookInfo => {
-      res.render('books/show', {
+      console.log('made it');
+      res.render('./details', {
         bookInfo
        })
     })

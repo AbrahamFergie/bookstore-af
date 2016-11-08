@@ -346,7 +346,7 @@ const getAuthorForBookId = (bookId) => {
   return db.any(sql, [bookId])
 }
 
-const getBookWithAuthorAndGenres = (bookId) => {
+const getBookWithAuthorsAndGenres = (bookId) => {
   return Promise.all([
     getBookById(bookId),
     getAuthorForBookId(bookId),
@@ -369,7 +369,7 @@ const getBookWithAuthorAndGenres = (bookId) => {
 module.exports = {
   getAllBooks,
   getBookById,
-  getBookWithAuthorAndGenres,
+  getBookWithAuthorsAndGenres,
   getGenreForBookId,
   getAuthorForBookId,
   getGenresByBookId,
