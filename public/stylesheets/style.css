@@ -61,6 +61,10 @@ a {
 #appName{
   display:inline-block;
   font-size:3em;
+  color:lightgrey;
+}
+#appName:hover{
+  color:skyblue;
 }
 #appNameMarginTop{
   height:1em;
@@ -70,15 +74,18 @@ a {
   margin-left:2em;
   cursor:pointer;
   margin-top:2em;
+  color:white;
+  font-size:1.2em;
 }
 .navLinks:hover{
   text-decoration:none;
+  color:skyblue;
 }
 #appName:hover{
   text-decoration:none;
 }
 #navigationBar{
-  background-color:/*background-color: rgba(255, 255, 255, .8);*/ indianred;
+  background-color: steelblue;
   margin-top:none;
   height:6em;
 }
@@ -90,14 +97,15 @@ a {
 #submitSearchBtn{
   border:none;
   color:white;
+  background-color: #189a4d;
 }
 #submitSearchBtn:hover{
-  background-color:green;
+  background-color:#17b558;
 }
 #searchBarContainer{
   float:right;
   display:inline-block;
-  margin-top:1.8em;
+  margin-top:2.3em;
   margin-right:2em;
 }
 #linkContainer{
