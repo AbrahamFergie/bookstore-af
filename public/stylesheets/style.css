@@ -1,10 +1,13 @@
 body {
-  padding: 50px;
+  /*padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("https://cdn.wallpaper.com/main/05_book_1.jpg");
   background-size: 100% 350%;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center;*/
+  margin-top:0;
+  position:relative;
+  padding-bottom:3em;
 }
 h1 {
 color: #1b99a3;
@@ -35,4 +38,74 @@ a {
 #homepage {
   z-index: -1;
   position:absolute;
+}
+.table-striped{
+  margin: 3% 10% 0 10%;
+}
+.contentMargins{
+  margin: 3% 10% 0 10%;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+#logoContainer{
+  display:inline-block;
+}
+#logoImg{
+  height:5em;
+  width:5em;
+  margin-left:2em;
+  margin-top:-0.8em;
+}
+#appMarginTop{
+  height:1em;
+}
+#appName{
+  display:inline-block;
+  font-size:3em;
+}
+#appNameMarginTop{
+  height:1em;
+}
+.navLinks{
+  float:right;
+  margin-left:2em;
+  cursor:pointer;
+  margin-top:2em;
+}
+.navLinks:hover{
+  text-decoration:none;
+}
+#appName:hover{
+  text-decoration:none;
+}
+#navigationBar{
+  background-color:/*background-color: rgba(255, 255, 255, .8);*/ indianred;
+  margin-top:none;
+  height:6em;
+}
+#searchBar{
+  width:20em;
+  border:none;
+  height:1.8em;
+}
+#submitSearchBtn{
+  border:none;
+  color:white;
+}
+#submitSearchBtn:hover{
+  background-color:green;
+}
+#searchBarContainer{
+  float:right;
+  display:inline-block;
+  margin-top:1.8em;
+  margin-right:2em;
+}
+#linkContainer{
+  display:inline-block;
+  float:right;
+  margin-right:2em;
+}
+#frontpageText{
+  text-align:center;
+  background-color:orange;
 }

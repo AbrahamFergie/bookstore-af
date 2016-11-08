@@ -12,28 +12,27 @@ html
     script(src="/javascripts/client.js")
 
   body
-    nav.navbar.navbar-default(id=nav)
-      div(id=homepage)
 
-      .container-fluid
-        .navbar-header
-          a.navbar-brand(href='#') Booky The Bookstore!
-            img(alt='Brand', src='../images/creepyBook.jpg' id='nav-bar-img')
-        ul.nav.navbar-nav.pagination.pagination-lg
-          li.active
-            a(href='/') Home
-          li
-            a(href='/books') Booklist
-          li
-            a(href='books/new') Add Book
+    <div id="navigationBar">
 
-            form.navbar-form.navbar-right(action='/search', method='get')
-                    .form-group
-                      input.form-control(type='text', name="q" placeholder='Search by Title or Author')
-                    button.btn.btn-default(type='submit') Submit
+      <div id="logoContainer">
+        <a href='/'><img  id="logoImg" alt="brand" src='../images/creepyBook.jpg' style="margin-top:-2em"/></a>
+      </div>
+
+      <div style="display:inline-block">
+      <div id="appNameMarginTop"></div>
+      <div><a href='/' id="appName">Bookstore</a></div>
+      </div>
+      <form action="/search" mathod="get" id="searchBarContainer"><input id="searchBar" type="text" name="q" placeholder="Search by Title or Author"><button id="submitSearchBtn" type="submit">Submit</button></form>
+      <div id="linkContainer">
+        <a id="link2" class="navLinks" href='/books/news'>Add Book</a>
+        <a id="link1" class="navLinks" href='/books'>Booklist</a>
+      </div>
 
 
+    </div>
 
 
 
+<div style="background-color:red; height:3em; bottom:-2em; left:0; right:0; position:absolute; width:100%">footer</div>
     block content
