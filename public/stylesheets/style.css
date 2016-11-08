@@ -6,6 +6,8 @@ body {
   background-repeat: no-repeat;
   background-position: center;*/
   margin-top:0;
+  position:relative;
+  padding-bottom:3em;
 }
 h1 {
 color: #1b99a3;
@@ -36,6 +38,12 @@ a {
 #homepage {
   z-index: -1;
   position:absolute;
+}
+.table-striped{
+  margin: 3% 10% 0 10%;
+}
+.contentMargins{
+  margin: 3% 10% 0 10%;
 }
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #logoContainer{
@@ -99,4 +107,5 @@ a {
 }
 #frontpageText{
   text-align:center;
+  background-color:orange;
 }

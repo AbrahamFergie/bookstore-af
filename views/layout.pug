@@ -23,11 +23,10 @@ html
       <div id="appNameMarginTop"></div>
       <div><a href='/' id="appName">Bookstore</a></div>
       </div>
-      <div id="searchBarContainer"><input id="searchBar"><button id="submitSearchBtn">Submit</button></div>
+      <form action="/search" mathod="get" id="searchBarContainer"><input id="searchBar" type="text" name="q" placeholder="Search by Title or Author"><button id="submitSearchBtn" type="submit">Submit</button></form>
       <div id="linkContainer">
-        <a id="link0" class="navLinks" href='/'>Home</a>
-        <a id="link1" class="navLinks" href='/books'>Booklist</a>
         <a id="link2" class="navLinks" href='/books/news'>Add Book</a>
+        <a id="link1" class="navLinks" href='/books'>Booklist</a>
       </div>
 
 
@@ -35,6 +34,5 @@ html
 
 
 
-
-
+<div style="background-color:red; height:3em; bottom:-2em; left:0; right:0; position:absolute; width:100%">footer</div>
     block content
