@@ -45,7 +45,7 @@ router.get('/:bookId', (req, res) => {
        })
     })
     .catch(error => {
-      console.log('im an error3!')
+
       res.render('error', {error})
     })
 })
@@ -53,7 +53,8 @@ router.get('/:bookId', (req, res) => {
 
 router.get('/:id/delete', (req, res) => {
   db.deleteBook( req.params.id )
-    .then( result => res.redirect ( '/' ))
+    .then( result => {console.log('im an error3!')
+      res.redirect ( '/' )})
     .catch( error => res.render( 'error', {error} ))
 })
 
