@@ -5,7 +5,7 @@ block content
     table.table-striped
       thead.h2
         tr
-          th
+          th Book-Cover
           th Title
           th Author
           th Genre
@@ -14,7 +14,7 @@ block content
         for book in books
           tr
             td
-              img(src=book.image)
+              img(src=book.image_url)
             td.h4
               a(href="books/"+book.id)=book.title
             td

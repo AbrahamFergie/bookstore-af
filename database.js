@@ -352,14 +352,14 @@ const getBookWithAuthorAndGenres = (bookId) => {
     getAuthorForBookId(bookId),
     getGenreForBookId(bookId),
   ]).then(([book, authors, genres]) => {
-    book.authors = authors
-    book.genres = genres
-    // const bookInfo = {
-    //   book,
-    //   authors,
-    //   genres
-    // }
-    return book
+    // book.authors = authors
+    // book.genres = genres
+    const bookInfo = {
+      book,
+      authors,
+      genres
+    }
+    return bookInfo
   })
 
 }
