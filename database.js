@@ -328,8 +328,7 @@ const getAuthorForBookId = (bookId) => {
     WHERE
       book_authors.book_id = ${bookId}
   `
-  console.log('im the error')
-  return db.one(sql, [bookId])
+  return db.any(sql, [bookId])
 }
   const getGenreForBookId = (bookId) => {
   const sql = `
@@ -344,9 +343,7 @@ const getAuthorForBookId = (bookId) => {
   WHERE
     book_genres.book_id = ${bookId}
   `
-  console.log('no, im the error')
-
-  return db.one(sql)
+  return db.any(sql, [bookId])
 }
 
 const getBookWithAuthorAndGenres = (bookId) => {
@@ -354,9 +351,14 @@ const getBookWithAuthorAndGenres = (bookId) => {
     getBookById(bookId),
     getAuthorForBookId(bookId),
     getGenreForBookId(bookId),
-  ]).then(([book, author, genre]) => {
-    book.author = author
-    book.genre = genre
+  ]).then(([book, authors, genres]) => {
+    book.authors = authors
+    book.genres = genres
+    // const bookInfo = {
+    //   book,
+    //   authors,
+    //   genres
+    // }
     return book
   })
 
