@@ -7,6 +7,7 @@ const db = require('../database')
 router.get('/', (req, res) => {
   let page = ( parseInt( req.query.page, 10 ) ) || 1
   db.getAllBooks(page)
+
     .then(books => {
       //db.truncatedDesc(books.description)
       res.render('books', { books, page })
@@ -24,7 +25,7 @@ router.get('/new', (req, res) => {
 
 router.post( '/new', (req, res) => {
   const { title, author, genre, description, image } = req.body
-  console.log(title)
+
   db.createBook(title, author, genre, description, image)
     .then(book => {
       res.redirect('/books/' + book.id)

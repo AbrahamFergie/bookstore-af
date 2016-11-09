@@ -9,7 +9,7 @@ block content
           th Title
           th Author
           th Genre
-          th Description
+
 
       tbody
         for book in books
@@ -24,8 +24,7 @@ block content
             td
               for genre in book.genres
                 li.list-unstyled=genre.name
-            td
-              p= book.description
+
 
     div.pager
       if page > 1

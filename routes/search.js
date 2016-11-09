@@ -6,7 +6,7 @@ const db = require('../database')
 // search
 router.get('/', (req, res) => {
   let page = ( parseInt( req.query.page, 10 ) ) || 1
-
+  console.log('im trying to search for: ' + req.query)
   const sqlQuery = 'q' in req.query ?
     db.findBooks(req.query.q) : db.getAllBooks(page)
 
