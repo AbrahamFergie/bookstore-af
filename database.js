@@ -305,7 +305,7 @@ const createGenre = (genreName) => {
 }
 
 
-const deleteBook = (bookIds) => {
+const deleteBook = ( bookIds ) => {
   const sql = `
     DELETE FROM
       books
