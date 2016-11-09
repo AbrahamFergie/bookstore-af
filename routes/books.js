@@ -51,7 +51,7 @@ router.get('/:bookId', (req, res) => {
 })
 
 
-router.get('/:id/delete', (req, res) => {
+router.delete('/:id/delete', (req, res) => {
   db.deleteBook( req.params.id )
     .then( result => {console.log('im an error3!')
       res.redirect ( '/' )})
