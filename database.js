@@ -12,7 +12,18 @@ const getAllBooks = ( page = 1 ) => {
   OFFSET $1
   `
   const variables = [offset]
+
   return db.manyOrNone( sql, variables ).then( addAuthorsToBooks ).then( addGenresToBooks )
+}
+
+const truncatedDesc = (str) => {
+  let counter = 0
+  let description = ''
+  for(let des of str){
+    if(counter == 20) break
+    description += des
+  }
+  return description
 }
 
 const getBookById = ( id ) => {
