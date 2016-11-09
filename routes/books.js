@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   let page = ( parseInt( req.query.page, 10 ) ) || 1
   db.getAllBooks(page)
     .then(books => {
+      //db.truncatedDesc(books.description)
       res.render('books', { books, page })
     })
     .catch(error => {
