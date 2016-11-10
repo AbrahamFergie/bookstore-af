@@ -3,18 +3,21 @@ extends ../layout
 block content
   h2.h2.text-center Your are now editing
 
-  form.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
+  form.form-hortizontal(method='post', action=(book ? `/books/${book}/edit` : '/books'))
     .form-group
-      input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
+      input.form-control(type='text', name=`title`, placeholder='Title', value=`${book.title || ''}`)
 
     .form-group
-      input.form-control(type='text', name='book[author]', placeholder='Author')
+      input.form-control(type='text', name='author', placeholder='Author', value = `${book.authors || ''}`)
 
     .form-group
-      textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookId || ''}`)
+      input.form-control(type='text', name='genre', placeholder='Genre', value = `${book.genres || ''}`)
 
     .form-group
-      input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${bookId || ''}`)
+      input.form-control(type='text', name='description', placeholder='Description', value= `${book.description || ''}`)
 
     .form-group
-      button.btn.btn-success(type='submit') Edit This Book
+      input.form-control(type='text', name='image', placeholder='Image URL', value=`${book.image_url || ''}`)
+
+    .form-group
+      button.btn.btn-success(type='submit') Update

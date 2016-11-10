@@ -55,16 +55,20 @@ router.get('/:bookId', (req, res) => {
 //Edit
 router.get('/:bookId/edit', (req, res) => {
   const { bookId } = req.params
-    res.render ('books/edit')
-
+  console.log('BookId: ' + bookId)
+  db.getBookById( bookId )
+    .then( book => {
+      res.render ('books/edit', {book})
+    })
 })
 
-router.post('/edit', (req, res) => {
-  const{ bookId } = req.body
+router.post('/:bookId/edit', (req, res) => {
+  const{ title, author, genre, image, description  } = req.body
+  const { bookId } = req.params
   console.log('bookId: ' + bookId)
-  db.editBook( bookId )
-    .then( result => {
-      res.render( '/details' )
+  db.editBook( bookId, title, author, genre, description, image )
+    .then( book => {
+      res.render( '/details', {book} )
     })
     .catch( error => {
       console.log('im an error3!')
