@@ -13,6 +13,11 @@ block content
   ul.list-unstyled
     for author in bookInfo.authors
       li.list-unstyled= author.name
+
+  h3.h3 Genres
+  ul.list-unstyled
+    for genre in bookInfo.genres
+      li.list-unstyled= genre.name
   span
     a.btn.btn-default(href=`/books/${bookInfo.book.id}/delete`) Delete This Book
   span

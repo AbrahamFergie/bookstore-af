@@ -11,10 +11,11 @@ block content
           th Title
           th Author
           th Genre
-          th Description
+
 
       tbody
         for book in books
+
           div.container
             div.row
               div.col-sm-2
@@ -31,6 +32,7 @@ block content
                   li.list-unstyled=genre.name
               div.col-sm-8
                 p= book.description
+
 
     div.pager
       if page > 1

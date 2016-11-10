@@ -7,7 +7,9 @@ const db = require('../database')
 router.get('/', (req, res) => {
   let page = ( parseInt( req.query.page, 10 ) ) || 1
   db.getAllBooks(page)
+
     .then(books => {
+      //db.truncatedDesc(books.description)
       res.render('books', { books, page })
     })
     .catch(error => {
@@ -23,7 +25,7 @@ router.get('/new', (req, res) => {
 
 router.post( '/new', (req, res) => {
   const { title, author, genre, description, image } = req.body
-  console.log(title)
+
   db.createBook(title, author, genre, description, image)
     .then(book => {
       res.redirect('/books/' + book.id)
@@ -45,16 +47,22 @@ router.get('/:bookId', (req, res) => {
        })
     })
     .catch(error => {
-      console.log('im an error3!')
+
       res.render('error', {error})
     })
 })
 
 
-router.get('/:id/delete', (req, res) => {
-  db.deleteBook( req.params.id )
-    .then( result => res.redirect ( '/' ))
-    .catch( error => res.render( 'error', {error} ))
+router.get('/:bookId/delete', (req, res) => {
+  const { bookId } = req.params
+  db.deleteBook( bookId )
+    .then( result => {
+      res.redirect ( '/' )
+    })
+    .catch( error => {
+      console.log('im an error3!')
+      res.render( 'error', {error} )
+    })
 })
 
 

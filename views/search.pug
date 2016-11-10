@@ -10,7 +10,7 @@ block content
           th Title
           th Author
           th Genre
-          th Description
+
       tbody
         for book in books
           tr
@@ -24,8 +24,7 @@ block content
             td
               for genre in book.genres
                 li.list=genre.name
-            td
-              p= book.description
+            
 
 
   else
