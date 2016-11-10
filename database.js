@@ -190,7 +190,7 @@ const getAuthorsForBooks = ( books ) => {
     ON
       book_authors.author_id = authors.id
     WHERE
-      authors.id IN ($1:csv)`
+      book_authors.book_id IN ($1:csv)`
   return db.manyOrNone( sql, [bookIds] )
 }
 
@@ -208,7 +208,7 @@ const getGenresForBooks = ( books ) => {
     ON
       book_genres.genre_id = genres.id
     WHERE
-      genres.id IN ($1:csv)
+      book_genres.book_id IN ($1:csv)
   `
 
   return db.manyOrNone( sql, [bookIds] )
@@ -319,14 +319,14 @@ const createGenre = ( genreName ) => {
 }
 
 
-const deleteBook = ( bookIds ) => {
+const deleteBook = ( bookId ) => {
   const sql = `
     DELETE FROM
       books
     WHERE
-      id=${id}
+      id=${bookId}
   `
-  const variables = [bookIds]
+  const variables = [bookId]
   return db.none( sql, variables )
 }
 
@@ -390,5 +390,6 @@ module.exports = {
   createBook,
   createGenre,
   createAuthor,
-  findBooks
+  findBooks,
+  deleteBook
 }

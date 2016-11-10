@@ -53,14 +53,16 @@ router.get('/:bookId', (req, res) => {
 })
 
 
-router.get('bookInfo.book.id', (req, res) => {
+router.get('/:bookId/delete', (req, res) => {
   const { bookId } = req.params
-  db.none( bookId )
+  db.deleteBook( bookId )
     .then( result => {
-      res.redirect ( '/' )})
+      res.redirect ( '/' )
+    })
     .catch( error => {
       console.log('im an error3!')
-      res.render( 'error', {error} )})
+      res.render( 'error', {error} )
+    })
 })
 
 
