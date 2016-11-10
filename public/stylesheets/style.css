@@ -121,19 +121,27 @@ tr{
   margin-right:2em;
 }
 #frontpageText{
+  position:absolute;
   text-align:center;
   font-size:2em;
+}
+
+#frontpageText video{
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-1;
 }
 hr{
   margin-top:3px;
   margin-bottom:3px;
 }
 #indexTextContent{
-  position:absolute;
-  margin-top:-26.1em;
-  padding: 6em 6em 10.25em 6em;
+  padding: 12% 6em 10.25em 6em;
   color:white;
   font-family: 'Work Sans', sans-serif;
+  background-color:tan;
 }
 #indexPageHeading{
   margin-bottom:0.6em;
@@ -141,12 +149,17 @@ hr{
 #rowSection{
   margin-top:2em;
   margin-bottom:3em;
+  width:100%;
 }
 .column{
   height:100%;
 }
 .innerColumn{
   height:100%;
+  text-align:center;
+}
+.innerColumn p{
+  font-size:1em;
 }
 .circularImg{
   background:rgba(0,0,0,0.2);
@@ -156,7 +169,7 @@ hr{
   margin-left:auto;
   margin-right:auto;
   margin-bottom: -0.4em;
-  padding-top:21px;
+  padding-top:11px;
 }
 .circularImg:hover{
   background:rgba(63,142,191,0.2);
@@ -201,7 +214,13 @@ footer{
   text-align:center;
   padding: 2em 0 1em 0;
 }
-
+#girlReadingImg{
+  display:none;
+  width:100%;
+  height:10em;
+  margin-left:auto;
+  margin-right:auto;
+}
 /* media queries for responsiveness */
 
 @media(max-width:400px){
@@ -256,6 +275,10 @@ footer{
   form{
     width:100%;
   }
+  #frontpageText{
+    position:relative;
+    padding-bottom:2em;
+  }
 }
 @media only screen and (min-width:401px) and (max-width:420px){
   video{
@@ -299,6 +322,10 @@ footer{
   .text-center{
     margin-top:4em;
   }
+  #frontpageText{
+    position:relative;
+    padding-bottom:2em;
+  }
 }
 @media only screen and (min-width:420px) and (max-width:595px){
   #searchBarContainer{
@@ -310,7 +337,7 @@ footer{
     text-align:center
   }
   #indexTextContent{
-    padding:92px;
+    padding:7px 30px 7px 30px;
   }
   /*#linkContainer{
     width:70%;
@@ -334,6 +361,16 @@ footer{
   .text-center{
     margin-top:4em;
   }
+  video{
+    display:none;
+  }
+  #girlReadingImg{
+    display:block;
+  }
+  #frontpageText{
+    position:relative;
+    padding-bottom:2em;
+  }
 }
 @media only screen and (min-width:596px) and (max-width:660px){
     .navLinks{
@@ -348,7 +385,7 @@ footer{
       text-align:center;
     }
     #indexTextContent{
-      padding:92px;
+      padding:7px 30px 7px 30px;
     }
     #linkContainer{
       width:100%;
@@ -363,13 +400,22 @@ footer{
     .text-center{
       margin-top:4em;
     }
+    video{
+      display:none;
+    }
+    #girlReadingImg{
+      display:block;
+    }
+    #frontpageText{
+      position:relative;
+    }
 }
 @media only screen and (min-width:661px) and (max-width:760px){
     .navLinks{
       color:steelblue;
     }
     #indexTextContent{
-      padding:92px;
+      padding:7px 30px 7px 30px;
     }
     #linkContainer{
       width:100%;
@@ -384,12 +430,26 @@ footer{
     }
     .text-center{
       margin-top:2em;
+    }
+    video{
+      display:none;
+    }
+    #girlReadingImg{
+      display:block;
+      width:100%;
+      height:12em;
+    }
+    #frontpageText{
+      position:relative;
     }
 }
 @media only screen and (min-width:761px) and (max-width:890px){
     .navLinks{
       color:steelblue;
     }
+    #indexTextContent{
+      padding:7px 30px 7px 30px;
+    }
     #linkContainer{
       width:100%;
       background-color:orange;
@@ -404,5 +464,23 @@ footer{
     .text-center{
       margin-top:2em;
     }
+    video{
+      display:none;
+    }
+    #girlReadingImg{
+      display:block;
+      width:100%;
+      height:12em;
+    }
+    #frontpageText{
+      position:relative;
+    }
 }
-@media only screen and (min-width:891px){}
+@media only screen and (min-width:891px){
+  #indexTextContent{
+    background-color:transparent;
+  }
+  video{
+    width:100%;
+  }
+}
