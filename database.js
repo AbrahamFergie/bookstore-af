@@ -318,6 +318,18 @@ const createGenre = ( genreName ) => {
   return db.one( sql, variables )
 }
 
+const editBook = ( bookId ) => {
+
+  const sql = `
+  UPDATE
+    books
+  WHERE
+    id=${bookId}
+    `
+  const variables = [bookId]
+  console.log('return: ' + bookId)
+  return db.any( sql, variables )
+}
 
 const deleteBook = ( bookId ) => {
   const sql = `
@@ -391,5 +403,6 @@ module.exports = {
   createGenre,
   createAuthor,
   findBooks,
-  deleteBook
+  deleteBook,
+  editBook
 }

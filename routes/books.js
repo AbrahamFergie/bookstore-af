@@ -1,6 +1,6 @@
-const express = require('express')
-const router = express.Router()
-const db = require('../database')
+const express = require('express');
+const router = express.Router();
+const db = require('../database');
 
 
 // INDEX
@@ -36,12 +36,12 @@ router.post( '/new', (req, res) => {
     })
 })
 
-// details
+// Details
 router.get('/:bookId', (req, res) => {
   const { bookId } = req.params
   db.getBookWithAuthorsAndGenres(bookId)
     .then(bookInfo => {
-      console.log('made it');
+
       res.render('./details', {
         bookInfo
        })
@@ -52,6 +52,25 @@ router.get('/:bookId', (req, res) => {
     })
 })
 
+//Edit
+router.get('/:bookId/edit', (req, res) => {
+  const { bookId } = req.params
+    res.render ('books/edit')
+
+})
+
+router.post('/edit', (req, res) => {
+  const{ bookId } = req.body
+  console.log('bookId: ' + bookId)
+  db.editBook( bookId )
+    .then( result => {
+      res.render( '/details' )
+    })
+    .catch( error => {
+      console.log('im an error3!')
+      res.render( 'error', {error} )
+    })
+})
 
 router.get('/:bookId/delete', (req, res) => {
   const { bookId } = req.params
@@ -60,10 +79,9 @@ router.get('/:bookId/delete', (req, res) => {
       res.redirect ( '/' )
     })
     .catch( error => {
-      console.log('im an error3!')
+
       res.render( 'error', {error} )
     })
 })
 
-
-module.exports = router
+module.exports = router;
