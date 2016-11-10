@@ -1,20 +1,21 @@
 extends ../layout
 
 block content
-  h2.h2.text-center Your are now editing
+  div.contentMargins
+    h2.h2.text-center Your are now editing
 
-  form.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
-    .form-group
-      input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
+    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
+      .form-group
+        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
 
-    .form-group
-      input.form-control(type='text', name='book[author]', placeholder='Author')
+      .form-group
+        input.form-control(type='text', name='book[author]', placeholder='Author')
 
-    .form-group
-      textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookId || ''}`)
+      .form-group
+        textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookId || ''}`)
 
-    .form-group
-      input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${bookId || ''}`)
+      .form-group
+        input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${bookId || ''}`)
 
-    .form-group
-      button.btn.btn-success(type='submit') Edit This Book
+      .form-group
+        button.btn.btn-success(type='submit') Edit This Book
