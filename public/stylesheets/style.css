@@ -160,7 +160,10 @@ hr{
 
 }
 .innerColumn p{
+
   font-size:1em;
+
+
 
   font-size:2em;
 }
@@ -187,6 +190,9 @@ hr{
 }
 .innerColumn{
   height:100%;
+
+
+
 
 }
 .circularImg{
@@ -237,7 +243,7 @@ footer{
   width:27em;
   margin:auto;
 }
-#formHorizontalNew{
+.formHorizontalNew{
   text-align:center;
   width:24em;
   margin:auto;
@@ -382,6 +388,10 @@ footer{
 
     padding:7px 30px 7px 30px;
 
+
+    padding:92px;
+
+
     padding:92px;
 
   }
@@ -437,6 +447,10 @@ footer{
 
       padding:7px 30px 7px 30px;
 
+
+      padding:92px;
+
+
       padding:92px;
 
     }
@@ -476,6 +490,7 @@ footer{
 
       padding:92px;
 
+      padding:92px;
     }
     #linkContainer{
       width:100%;
@@ -503,7 +518,7 @@ footer{
     #frontpageText{
       position:relative;
     }
- 
+
 
 }
 @media only screen and (min-width:761px) and (max-width:890px){
