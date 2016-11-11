@@ -159,7 +159,31 @@ hr{
   text-align:center;
 }
 .innerColumn p{
-  font-size:1em;
+  font-size:2em;
+}
+hr{
+  margin-top:3px;
+  margin-bottom:3px;
+}
+#indexTextContent{
+  position:absolute;
+  margin-top:-26.1em;
+  padding: 6em 6em 10.25em 6em;
+  color:white;
+  font-family: 'Work Sans', sans-serif;
+}
+#indexPageHeading{
+  margin-bottom:0.6em;
+}
+#rowSection{
+  margin-top:2em;
+  margin-bottom:3em;
+}
+.column{
+  height:100%;
+}
+.innerColumn{
+  height:100%;
 }
 .circularImg{
   background:rgba(0,0,0,0.2);
@@ -220,9 +244,6 @@ footer{
   height:10em;
   margin-left:auto;
   margin-right:auto;
-}
-#editPage{
-
 }
 /* media queries for responsiveness */
 
@@ -341,6 +362,7 @@ footer{
   }
   #indexTextContent{
     padding:7px 30px 7px 30px;
+    padding:92px;
   }
   /*#linkContainer{
     width:70%;
@@ -389,6 +411,7 @@ footer{
     }
     #indexTextContent{
       padding:7px 30px 7px 30px;
+      padding:92px;
     }
     #linkContainer{
       width:100%;
@@ -419,6 +442,7 @@ footer{
     }
     #indexTextContent{
       padding:7px 30px 7px 30px;
+      padding:92px;
     }
     #linkContainer{
       width:100%;
@@ -487,3 +511,4 @@ footer{
     width:100%;
   }
 }
+@media only screen and (min-width:891px){}
