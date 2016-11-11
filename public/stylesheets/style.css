@@ -157,9 +157,37 @@ hr{
 .innerColumn{
   height:100%;
   text-align:center;
+<<<<<<< Updated upstream
 }
 .innerColumn p{
   font-size:1em;
+=======
+  font-size:2em;
+}
+hr{
+  margin-top:3px;
+  margin-bottom:3px;
+}
+#indexTextContent{
+  position:absolute;
+  margin-top:-26.1em;
+  padding: 6em 6em 10.25em 6em;
+  color:white;
+  font-family: 'Work Sans', sans-serif;
+}
+#indexPageHeading{
+  margin-bottom:0.6em;
+}
+#rowSection{
+  margin-top:2em;
+  margin-bottom:3em;
+}
+.column{
+  height:100%;
+}
+.innerColumn{
+  height:100%;
+>>>>>>> Stashed changes
 }
 .circularImg{
   background:rgba(0,0,0,0.2);
@@ -169,7 +197,11 @@ hr{
   margin-left:auto;
   margin-right:auto;
   margin-bottom: -0.4em;
+<<<<<<< Updated upstream
   padding-top:11px;
+=======
+  padding-top:21px;
+>>>>>>> Stashed changes
 }
 .circularImg:hover{
   background:rgba(63,142,191,0.2);
@@ -214,6 +246,7 @@ footer{
   text-align:center;
   padding: 2em 0 1em 0;
 }
+<<<<<<< Updated upstream
 #girlReadingImg{
   display:none;
   width:100%;
@@ -221,6 +254,9 @@ footer{
   margin-left:auto;
   margin-right:auto;
 }
+=======
+
+>>>>>>> Stashed changes
 /* media queries for responsiveness */
 
 @media(max-width:400px){
@@ -275,10 +311,13 @@ footer{
   form{
     width:100%;
   }
+<<<<<<< Updated upstream
   #frontpageText{
     position:relative;
     padding-bottom:2em;
   }
+=======
+>>>>>>> Stashed changes
 }
 @media only screen and (min-width:401px) and (max-width:420px){
   video{
@@ -322,10 +361,13 @@ footer{
   .text-center{
     margin-top:4em;
   }
+<<<<<<< Updated upstream
   #frontpageText{
     position:relative;
     padding-bottom:2em;
   }
+=======
+>>>>>>> Stashed changes
 }
 @media only screen and (min-width:420px) and (max-width:595px){
   #searchBarContainer{
@@ -337,7 +379,11 @@ footer{
     text-align:center
   }
   #indexTextContent{
+<<<<<<< Updated upstream
     padding:7px 30px 7px 30px;
+=======
+    padding:92px;
+>>>>>>> Stashed changes
   }
   /*#linkContainer{
     width:70%;
@@ -361,6 +407,7 @@ footer{
   .text-center{
     margin-top:4em;
   }
+<<<<<<< Updated upstream
   video{
     display:none;
   }
@@ -371,6 +418,8 @@ footer{
     position:relative;
     padding-bottom:2em;
   }
+=======
+>>>>>>> Stashed changes
 }
 @media only screen and (min-width:596px) and (max-width:660px){
     .navLinks{
@@ -385,7 +434,11 @@ footer{
       text-align:center;
     }
     #indexTextContent{
+<<<<<<< Updated upstream
       padding:7px 30px 7px 30px;
+=======
+      padding:92px;
+>>>>>>> Stashed changes
     }
     #linkContainer{
       width:100%;
@@ -400,6 +453,7 @@ footer{
     .text-center{
       margin-top:4em;
     }
+<<<<<<< Updated upstream
     video{
       display:none;
     }
@@ -409,13 +463,19 @@ footer{
     #frontpageText{
       position:relative;
     }
+=======
+>>>>>>> Stashed changes
 }
 @media only screen and (min-width:661px) and (max-width:760px){
     .navLinks{
       color:steelblue;
     }
     #indexTextContent{
+<<<<<<< Updated upstream
       padding:7px 30px 7px 30px;
+=======
+      padding:92px;
+>>>>>>> Stashed changes
     }
     #linkContainer{
       width:100%;
@@ -431,6 +491,7 @@ footer{
     .text-center{
       margin-top:2em;
     }
+<<<<<<< Updated upstream
     video{
       display:none;
     }
@@ -442,14 +503,19 @@ footer{
     #frontpageText{
       position:relative;
     }
+=======
+>>>>>>> Stashed changes
 }
 @media only screen and (min-width:761px) and (max-width:890px){
     .navLinks{
       color:steelblue;
     }
+<<<<<<< Updated upstream
     #indexTextContent{
       padding:7px 30px 7px 30px;
     }
+=======
+>>>>>>> Stashed changes
     #linkContainer{
       width:100%;
       background-color:orange;
@@ -464,6 +530,7 @@ footer{
     .text-center{
       margin-top:2em;
     }
+<<<<<<< Updated upstream
     video{
       display:none;
     }
@@ -483,4 +550,7 @@ footer{
   video{
     width:100%;
   }
+=======
+>>>>>>> Stashed changes
 }
+@media only screen and (min-width:891px){}
