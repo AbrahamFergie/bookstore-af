@@ -34,8 +34,8 @@ const getBookById = ( id ) => {
       books
     WHERE
       id=${id}`
-  const variables = [id]
-  return db.oneOrNone( sql, variables )
+  console.log('BookId: ' + id)
+  return db.oneOrNone( sql )
 }
 
 const getBookByIdWithAuthors = ( id ) => {
@@ -318,17 +318,19 @@ const createGenre = ( genreName ) => {
   return db.one( sql, variables )
 }
 
-const editBook = ( bookId ) => {
+const editBook = ( id, title, author, genre, image, description  ) => {
 
   const sql = `
+
   UPDATE
     books
+  SET title = '${title}', image_url = '${image}', description = '${description}'
   WHERE
-    id=${bookId}
+    id=${id};
     `
-  const variables = [bookId]
-  console.log('return: ' + bookId)
-  return db.any( sql, variables )
+
+  console.log('return: ' + id)
+  return db.any( sql )
 }
 
 const deleteBook = ( bookId ) => {

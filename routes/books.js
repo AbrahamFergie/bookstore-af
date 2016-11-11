@@ -31,7 +31,7 @@ router.post( '/new', (req, res) => {
       res.redirect('/books/' + book.id)
     })
     .catch(error => {
-      console.log('im an error2!')
+
       res.render('error', { error })
     })
 })
@@ -39,15 +39,13 @@ router.post( '/new', (req, res) => {
 // Details
 router.get('/:bookId', (req, res) => {
   const { bookId } = req.params
-  db.getBookWithAuthorsAndGenres(bookId)
+  db.getBookWithAuthorsAndGenres( bookId )
     .then(bookInfo => {
 
-      res.render('./details', {
-        bookInfo
-       })
+      res.render('./details', { bookInfo })
     })
     .catch(error => {
-
+      console.log('im an error2!')
       res.render('error', {error})
     })
 })
@@ -55,16 +53,21 @@ router.get('/:bookId', (req, res) => {
 //Edit
 router.get('/:bookId/edit', (req, res) => {
   const { bookId } = req.params
-    res.render ('books/edit')
 
+  db.getBookById( bookId )
+    .then( book => {
+      res.render ('books/edit', {book})
+    })
 })
 
-router.post('/edit', (req, res) => {
-  const{ bookId } = req.body
-  console.log('bookId: ' + bookId)
-  db.editBook( bookId )
-    .then( result => {
-      res.render( '/details' )
+router.post('/:bookId/edit', (req, res) => {
+  const{ id, title, author, genre, image, description  } = req.body
+
+
+  console.log('req.body: ' + req.body.id)
+  db.editBook( id, title, author, genre, image, description )
+    .then( book => {
+      res.redirect( `/books/${id}` )
     })
     .catch( error => {
       console.log('im an error3!')
