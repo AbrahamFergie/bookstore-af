@@ -5,12 +5,12 @@ block content
     h1.booksPageHeading Book List
 
     table.table-striped
-      thead.h2
-        tr
-          th Book-Cover
-          th Title
-          th Author
-          th Genre
+      div.container
+        div.row
+          div.col-sm-2.h4 Book-Cover
+          div.col-sm-3.h4 Title
+          div.col-sm-3.h4 Author
+          div.col-sm-4.h4 Genre
 
 
       tbody
@@ -20,20 +20,15 @@ block content
             div.row
               div.col-sm-2
                 img(src=book.image_url)
-              div.h4.col-sm-2
+              div.h4.col-sm-3
                 a(href="books/"+book.id)=book.title
-                br
-                br
+              div.col-sm-3
                 for author in book.authors
                   li.list-unstyled=author.name
+              div.col-sm-4
                 for genre in book.genres
-                  br
-                  br
                   li.list-unstyled=genre.name
-              div.col-sm-8
-                p= book.description
-
-
+          br
     div.pager
       if page > 1
         a.btn.btn-default(href=`?page=${page - 1}`) &laquo; Previous
