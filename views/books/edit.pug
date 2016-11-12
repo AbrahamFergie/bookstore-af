@@ -7,6 +7,7 @@ block content
 
 
 
+
   form.form-hortizontal(method='post', action=(book.id ? '/books/'+book.id : '/books'))
     .form-group
       input.form-control(type='text', name='book[title]', placeholder='Title', value=`${book.title || ''}`)
@@ -39,8 +40,17 @@ block content
       .form-group
         input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
 
+    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
+      .form-group
+        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
+
+
+
       .form-group
         input.form-control(type='text', name='book[author]', placeholder='Author')
+      .form-group
+        input.form-control(type='text', name='book[genre]',
+        placeholder='Genre')
 
       .form-group
         textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookId || ''}`)
@@ -50,6 +60,7 @@ block content
 
       .form-group
         button.btn.btn-success(type='submit') Edit This Book
+
 
 
       .form-group
