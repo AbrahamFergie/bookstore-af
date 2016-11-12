@@ -15,6 +15,23 @@ block content
 
       tbody
         for book in books
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+          tr
+            td
+              img(src=book.image_url)
+            td.h4
+              a(href="books/"+book.id)=book.title
+            td
+              for author in book.authors
+                li.list-unstyled=author.name
+            td
+              for genre in book.genres
+                li.list-unstyled=genre.name
+
+=======
+=======
+>>>>>>> master
           div.container
             div.row
               div.col-sm-2
@@ -28,6 +45,10 @@ block content
                 for genre in book.genres
                   li.list-unstyled=genre.name
  
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+>>>>>>> master
 
     div.pager
       if page > 1
