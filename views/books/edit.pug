@@ -4,6 +4,8 @@ block content
   div.contentMargins
     h2.h2.text-center Your are now editing
 
+<<<<<<< HEAD
+
 
 
 
@@ -38,9 +40,24 @@ block content
     form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
       .form-group
         input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
+=======
+    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
+      .form-group
+        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
+
+>>>>>>> 2f363a3d8a42db1875ec64b33fae105a61c18b17
+
+    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
+      .form-group
+        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
+
+
 
       .form-group
         input.form-control(type='text', name='book[author]', placeholder='Author')
+      .form-group
+        input.form-control(type='text', name='book[genre]',
+        placeholder='Genre')
 
       .form-group
         textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookId || ''}`)
@@ -50,11 +67,15 @@ block content
 
       .form-group
         button.btn.btn-success(type='submit') Edit This Book
+<<<<<<< HEAD
 
-
-      .form-group
-        button.btn.btn-success(type='submit') Edit This Book
 
 
       .form-group
         button.btn.btn-success(type='submit') Edit This Book
+
+
+      .form-group
+        button.btn.btn-success(type='submit') Edit This Book
+=======
+>>>>>>> 2f363a3d8a42db1875ec64b33fae105a61c18b17
