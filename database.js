@@ -8,6 +8,7 @@ const getAllBooks = ( page = 1 ) => {
     *
   FROM
     books
+  ORDER BY title ASC
   LIMIT 10
   OFFSET $1
   `
@@ -34,8 +35,8 @@ const getBookById = ( id ) => {
       books
     WHERE
       id=${id}`
-  const variables = [id]
-  return db.oneOrNone( sql, variables )
+  console.log('BookId: ' + id)
+  return db.oneOrNone( sql )
 }
 
 const getBookByIdWithAuthors = ( id ) => {
@@ -317,7 +318,52 @@ const createGenre = ( genreName ) => {
   const variables = [genreName]
   return db.one( sql, variables )
 }
+const editAuthor = ( id, author ) => {
+  const sql = `
+  UPDATE
+    authors
+  SET name = '${author}'
+  WHERE
+    id=(SELECT authors.id FROM authors	JOIN book_authors ON authors.id = book_authors.author_id
+  JOIN books ON book_authors.book_id = books.id WHERE books.id = ${id});
+  `
 
+  return db.any( sql )
+}
+const editGenre = ( id, genre ) => {
+
+  const sql = `
+  UPDATE
+    genres
+  SET name = '${genre}'
+  WHERE
+    id=(SELECT genres.id FROM genres JOIN book_genres ON genres.id = book_genres.genre_id
+  JOIN books ON book_genres.book_id = books.id WHERE books.id = ${id});
+  `
+return db.any( sql )
+}
+
+const editBook = ( id, title, image, description  ) => {
+
+  const sql = `
+  UPDATE
+    books
+  SET title = '${title}', image_url = '${image}', description = '${description}'
+  WHERE
+    id=${id};
+    `
+  console.log('return: ' + sql)
+  return db.any( sql )
+}
+const editWholeBook = ( id, title, author, genre, image, description ) => {
+
+  return Promise.all([
+    editBook(id, title, description, image),
+    editAuthor(id, author),
+    editGenre(id, genre)
+  ])
+  .catch( error => console.log( 'error!!!!!!!!!!!!!!!!' ) )
+}
 
 const deleteBook = ( bookId ) => {
   const sql = `
@@ -391,5 +437,9 @@ module.exports = {
   createGenre,
   createAuthor,
   findBooks,
-  deleteBook
+  deleteBook,
+  editWholeBook,
+  editGenre,
+  editAuthor,
+  editBook
 }

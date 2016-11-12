@@ -2,6 +2,8 @@ extends layout
 
 block content
 
+    h1.booksPageHeading Book List
+
     table.table-striped
       div.container
         div.row
@@ -13,6 +15,7 @@ block content
 
       tbody
         for book in books
+<<<<<<< HEAD
 <<<<<<< Updated upstream
           tr
             td
@@ -27,6 +30,8 @@ block content
                 li.list-unstyled=genre.name
 
 =======
+=======
+>>>>>>> master
           div.container
             div.row
               div.col-sm-2
@@ -40,7 +45,10 @@ block content
                 for genre in book.genres
                   li.list-unstyled=genre.name
  
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> master
 
     div.pager
       if page > 1

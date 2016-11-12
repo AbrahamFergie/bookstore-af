@@ -4,20 +4,27 @@ block content
   div.contentMargins
     h2.h2.text-center Your are now editing
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   form.form-hortizontal(method='post', action=(book.id ? '/books/'+book.id : '/books'))
     .form-group
       input.form-control(type='text', name='book[title]', placeholder='Title', value=`${book.title || ''}`)
+=======
+    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
+      .form-group
+        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
+>>>>>>> master
 
-    .form-group
-      input.form-control(type='text', name='book[author]', placeholder='Author')
+      .form-group
+        input.form-control(type='text', name='book[author]', placeholder='Author')
 
-    .form-group
-      textarea.form-control(name='book[description]', placeholder='Description')= book.description
+      .form-group
+        textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookId || ''}`)
 
-    .form-group
-      input.form-control(type='text', name='book[image]', placeholder='Image URL', value=`${book.image || ''}`)
+      .form-group
+        input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${bookId || ''}`)
 
+<<<<<<< HEAD
     .form-group
       button.btn.btn-success(type='submit') Add This Book
 =======
@@ -37,3 +44,7 @@ block content
       .form-group
         button.btn.btn-success(type='submit') Edit This Book
 >>>>>>> Stashed changes
+=======
+      .form-group
+        button.btn.btn-success(type='submit') Edit This Book
+>>>>>>> master

@@ -1,6 +1,6 @@
-const express = require('express')
-const router = express.Router()
-const db = require('../database')
+const express = require('express');
+const router = express.Router();
+const db = require('../database');
 
 
 // INDEX
@@ -31,27 +31,49 @@ router.post( '/new', (req, res) => {
       res.redirect('/books/' + book.id)
     })
     .catch(error => {
-      console.log('im an error2!')
+
       res.render('error', { error })
     })
 })
 
-// details
+// Details
 router.get('/:bookId', (req, res) => {
   const { bookId } = req.params
-  db.getBookWithAuthorsAndGenres(bookId)
+  console.log('id of book: '+bookId);
+  db.getBookWithAuthorsAndGenres( bookId )
     .then(bookInfo => {
-      console.log('made it');
-      res.render('./details', {
-        bookInfo
-       })
+
+      res.render('./details', { bookInfo })
     })
     .catch(error => {
-
+      console.log('im an error2!')
       res.render('error', {error})
     })
 })
 
+//Edit
+router.get('/:bookId/edit', (req, res) => {
+  const { bookId } = req.params
+
+  db.getBookById( bookId )
+    .then( book => {
+      res.render ('books/edit', {book})
+    })
+})
+
+router.post('/:bookId/edit', (req, res) => {
+  const{ id, title, author, genre, image, description  } = req.body
+
+  console.log('req.body: ' + req.body.id)
+  db.editWholeBook( id, title, author, genre, image, description )
+    .then( booksInfo => {
+      res.redirect( `./books/${id}` )
+    })
+    .catch( error => {
+      console.log('im an error3!')
+      res.render( 'error', {error} )
+    })
+})
 
 router.get('/:bookId/delete', (req, res) => {
   const { bookId } = req.params
@@ -60,10 +82,9 @@ router.get('/:bookId/delete', (req, res) => {
       res.redirect ( '/' )
     })
     .catch( error => {
-      console.log('im an error3!')
+
       res.render( 'error', {error} )
     })
 })
 
-
-module.exports = router
+module.exports = router;
