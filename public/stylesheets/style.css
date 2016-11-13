@@ -38,7 +38,8 @@ a{
   position:absolute;
 }
 .table-striped{
-  margin: 3% 10% 0 10%;
+  margin: 3% 10% 0 4%;
+  width:90%;
 }
 .contentMargins{
   margin: 3% 10% 0 10%;
@@ -146,6 +147,28 @@ hr{
 #indexPageHeading{
   margin-bottom:0.6em;
 }
+a{
+  cursor:pointer;
+}
+tbody{
+  font-size:1.5em;
+  list-style:none;
+}
+tr{
+  margin-bottom:1em
+}
+.row{
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-bottom: 16px;
+    background-color: #F6F6F5;
+    padding: 14px;
+    box-shadow: 2px 2px 0px 1px #ccc;
+}
+#indexPageRow{
+  background-color:transparent;
+  box-shadow:none;
+}
 #rowSection{
   margin-top:2em;
   margin-bottom:3em;
@@ -224,6 +247,9 @@ footer{
 /* media queries for responsiveness */
 
 @media(max-width:400px){
+  .table-striped{
+    margin-top:8em;
+  }
   video{
     display:none;
   }
@@ -281,6 +307,9 @@ footer{
   }
 }
 @media only screen and (min-width:401px) and (max-width:420px){
+  .table-striped{
+    margin-top:8em;
+  }
   video{
     display:none;
   }
@@ -328,6 +357,9 @@ footer{
   }
 }
 @media only screen and (min-width:420px) and (max-width:595px){
+  .table-striped{
+    margin-top:8em;
+  }
   #searchBarContainer{
     width:100%;
     background-color:#447299;
@@ -373,6 +405,9 @@ footer{
   }
 }
 @media only screen and (min-width:596px) and (max-width:660px){
+    .table-striped{
+      margin-top:8em;
+    }
     .navLinks{
       color:steelblue;
     }
@@ -411,6 +446,9 @@ footer{
     }
 }
 @media only screen and (min-width:661px) and (max-width:760px){
+    .table-striped{
+      margin-top:6em;
+    }
     .navLinks{
       color:steelblue;
     }
@@ -444,6 +482,9 @@ footer{
     }
 }
 @media only screen and (min-width:761px) and (max-width:890px){
+    .table-striped{
+      margin-top:6em;
+    }
     .navLinks{
       color:steelblue;
     }
