@@ -238,7 +238,7 @@ footer{
   }
   #searchBarContainer{
     min-width:100%;
-    background-color:lightgrey;
+    background-color:#447299;
     padding:1em;
     margin-right:0;
     margin-top:0.67em;
@@ -294,7 +294,7 @@ footer{
   }
   #searchBarContainer{
     width:100%;
-    background-color:skyblue;
+    background-color:#447299;
     padding:1em;
     margin-right:0;
     margin-top:0.67em;
@@ -330,7 +330,7 @@ footer{
 @media only screen and (min-width:420px) and (max-width:595px){
   #searchBarContainer{
     width:100%;
-    background-color:limegreen;
+    background-color:#447299;
     padding:1em;
     margin-right:0;
     margin-top:0.67em;
@@ -378,7 +378,7 @@ footer{
     }
     #searchBarContainer{
       width:100%;
-      background-color:green;
+      background-color:#447299;
       padding:1em;
       margin-right:0;
       margin-top:0.67em;
