@@ -4,11 +4,6 @@ block content
   div.contentMargins
     h2.h2.text-center Your are now editing
 
-<<<<<<< HEAD
-
-
-
-
   form.form-hortizontal(method='post', action=(book.id ? '/books/'+book.id : '/books'))
     .form-group
       input.form-control(type='text', name='book[title]', placeholder='Title', value=`${book.title || ''}`)
@@ -32,50 +27,5 @@ block content
       .form-group
         input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${bookId || ''}`)
 
-
-
-    .form-group
+      .form-group
       button.btn.btn-success(type='submit') Add This Book
-
-    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
-      .form-group
-        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
-=======
-    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
-      .form-group
-        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
-
->>>>>>> 2f363a3d8a42db1875ec64b33fae105a61c18b17
-
-    form.formHorizontalNew.form-hortizontal(method='post', action=(bookId ? '/books/'+bookId : '/books'))
-      .form-group
-        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookId || ''}`)
-
-
-
-      .form-group
-        input.form-control(type='text', name='book[author]', placeholder='Author')
-      .form-group
-        input.form-control(type='text', name='book[genre]',
-        placeholder='Genre')
-
-      .form-group
-        textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookId || ''}`)
-
-      .form-group
-        input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${bookId || ''}`)
-
-      .form-group
-        button.btn.btn-success(type='submit') Edit This Book
-<<<<<<< HEAD
-
-
-
-      .form-group
-        button.btn.btn-success(type='submit') Edit This Book
-
-
-      .form-group
-        button.btn.btn-success(type='submit') Edit This Book
-=======
->>>>>>> 2f363a3d8a42db1875ec64b33fae105a61c18b17
