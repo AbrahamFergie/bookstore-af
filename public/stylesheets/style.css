@@ -205,10 +205,10 @@ footer{
   width:27em;
   margin:auto;
 }
-#formHorizontalNew{
+.formHorizontalNew, .form-group{
   text-align:center;
   width:24em;
-  margin:auto;
+  margin:0 auto 1em auto;
 }
 .booksPageHeading{
   text-align:center;
