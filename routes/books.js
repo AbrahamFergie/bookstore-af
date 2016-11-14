@@ -57,14 +57,19 @@ router.get('/:bookId/edit', (req, res) => {
 
   db.getBookById( bookId )
     .then( book => {
+      console.log('im here')
       res.render ('books/edit', {book})
+    })
+    .catch( error => {
+      console.log('im an error4!')
+      res.render( 'error', {error} )
     })
 })
 
 router.post('/:bookId/edit', (req, res) => {
   const{ id, title, author, genre, image, description  } = req.body
-
   console.log('req.body: ' + req.body.id)
+
   db.editWholeBook( id, title, author, genre, image, description )
     .then( booksInfo => {
       res.redirect( `./books/${id}` )

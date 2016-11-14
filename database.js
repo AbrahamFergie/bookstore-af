@@ -356,12 +356,14 @@ const editBook = ( id, title, image, description  ) => {
   return db.any( sql )
 }
 const editWholeBook = ( id, title, author, genre, image, description ) => {
-
+  console.log( 'HERE!!!!!!!!!!!!!!!!' )
   return Promise.all([
     editBook(id, title, description, image),
     editAuthor(id, author),
     editGenre(id, genre)
-  ])
+  ]).then(()=> {
+    return true
+  })
   .catch( error => console.log( 'error!!!!!!!!!!!!!!!!' ) )
 }
 
