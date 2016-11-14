@@ -15,23 +15,20 @@ html
 
   body
 
-    <div id="navigationBar">
-
-      <div id="logoContainer">
-        <a href='/'><img  id="logoImg" alt="brand" src='../images/creepyBook.jpg' style="margin-top:-2em"/></a>
-      </div>
-
-      <div style="display:inline-block">
-      <div id="appNameMarginTop"></div>
-      <div><a href='/' id="appName">Booky</a></div>
-      </div>
-      <form action="/search" mathod="get" id="searchBarContainer"><input id="searchBar" type="text" name="q" placeholder="Search by Title or Author"><button id="submitSearchBtn" type="submit">Submit</button></form>
-      <div id="linkContainer">
-        <a id="link2" class="navLinks" href='/books/new'>Add Book</a>
-        <a id="link1" class="navLinks" href='/books'>Booklist</a>
-      </div>
-
-    </div>
+    #navigationBar
+      #logoContainer
+        a(href='/')
+          img#logoImg(alt='brand', src='../images/creepyBook.jpg', style='margin-top:-2em')
+      div(style='display:inline-block')
+        #appNameMarginTop
+        div
+          a#appName(href='/') Booky
+      form#searchBarContainer(action='/search', mathod='get')
+        input#searchBar(type='text', name='q', placeholder='Search by Title or Author')
+        button#submitSearchBtn(type='submit') Submit
+      #linkContainer
+        a#link2.navLinks(href='/books/new') Add Book
+        a#link1.navLinks(href='/books') Booklist
 
 
 

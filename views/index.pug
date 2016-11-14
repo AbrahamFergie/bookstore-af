@@ -1,53 +1,38 @@
 extends layout
 
 block content
-
-  <div id="frontpageText">
-    <img id="girlReadingImg" src="images/girlReadingImg.jpg"/>
-    <img id="lotsOfBooksImg" src="images/lotsOfBooks.jpg"/>
-    <div id="indexTextContent">
-      <h1 id="indexPageHeading">Imagine, explore, read</h1>
-      <hr style="width:6em"/>
-      <i class="fa fa-book" aria-hidden="true"></i>
-      <hr style="width:9em;"/>
-      <p style="font-size:0.8em">Booky is the book lovers directory. We're book worms, just like you, and we live to explore and commune with fellow book lovers about the stories and books we love and appreciate. Contribute today by adding some of the books you can't help but share. Happy reading.</p>
-    </div>
-  </div> <!-- end of frontpageText section -->
-  <video src="./video/Reading-4953.mp4" autoplay="true" loop="true" muted="true"></video>
-  <div id="rowSection" class="container">
-    <div class="row" id="indexPageRow">
-      <div id="directoryColumn" class="column col-sm-4">
-        <div class="innerColumn">
-           <div class="circularImg">
-            <a href="/books">
-              <i class="fa fa-folder-open fa-lg" aria-hidden="true"></i>
-            </a>
-           </div>
-        <h3>directory</h3>
-        <p>Look through our current book list and find something that inspires.</p>
-        </div>
-      </div>
-      <div id="addBookColumn" class="column col-sm-4">
-        <div class="innerColumn">
-            <div class="circularImg">
-              <a href="/books/new">
-                <i class="fa fa-book fa-lg" aria-hidden="true"></i>
-              </a>
-            </div>
-            <h3>add book</h3>
-            <p>Have a book in mind you'd like to share, take agency, add it.</p>
-        </div>
-      </div>
-      <div id="aboutUsColumn" class="column col-sm-4">
-        <div class="innerColumn">
-            <div class="circularImg">
-              <a href="https://github.com/AbrahamFergie/myBooky" target="_blank">
-                <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
-              </a>
-            </div>
-            <h3>our code</h3>
-            <p>Take a look at how everything thing runs under the hood.</p>
-        </div>
-      </div>
-    </div>
-  </div> <!-- end of rowSection -->
+  #frontpageText
+    img#girlReadingImg(src='images/girlReadingImg.jpg')
+    img#lotsOfBooksImg(src='images/lotsOfBooks.jpg')
+    #indexTextContent
+      h1#indexPageHeading Imagine, explore, read
+      hr(style='width:6em')
+      i.fa.fa-book(aria-hidden='true')
+      hr(style='width:9em;')
+      p(style='font-size:0.8em')
+        | Booky is the book lovers directory. We're book worms, just like you, and we live to explore and commune with fellow book lovers about the stories and books we love and appreciate. Contribute today by adding some of the books you can't help but share. Happy reading.
+  // end of frontpageText section
+  video(src='./video/Reading-4953.mp4', autoplay='true', loop='true', muted='true')
+  #rowSection.container
+    #indexPageRow.row
+      #directoryColumn.column.col-sm-4
+        .innerColumn
+          .circularImg
+            a(href='/books')
+              i.fa.fa-folder-open.fa-lg(aria-hidden='true')
+          h3 directory
+          p Look through our current book list and find something that inspires.
+      #addBookColumn.column.col-sm-4
+        .innerColumn
+          .circularImg
+            a(href='/books/new')
+              i.fa.fa-book.fa-lg(aria-hidden='true')
+          h3 add book
+          p Have a book in mind you'd like to share, take agency, add it.
+      #aboutUsColumn.column.col-sm-4
+        .innerColumn
+          .circularImg
+            a(href='https://github.com/AbrahamFergie/myBooky', target='_blank')
+              i.fa.fa-smile-o.fa-lg(aria-hidden='true')
+          h3 our code
+          p Take a look at how everything thing runs under the hood.
