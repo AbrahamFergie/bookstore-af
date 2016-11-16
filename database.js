@@ -61,21 +61,6 @@ const getBookByIdWithGenres = ( id ) => {
     })
 }
 
-// const getAuthorsByBookId = (id) => {
-//   const sql = `
-//     SELECT *
-//      FROM
-//       authors
-//      JOIN
-//       book_authors
-//      ON
-//       book_authors.author_id=author_id
-//      WHERE
-//       book_authors.book_id=$1`
-//   const variables = [id]
-//   return db.manyOrNone(sql, variables)
-// }
-
 const getAuthorsByBookId = ( id ) => {
   const sql = `
   SELECT
@@ -265,23 +250,6 @@ const associateBookWithGenre = ( book, genre ) => {
   return db.any( sql, [book.id, genre.id] )
 }
 
-//const associateBookAuthorAndGenre = (book, author, genre) => {
-  // const sql = `
-  //   BEGIN TRANSACTION;
-  //   INSERT INTO
-  //     book_authors(book_id, author_id)
-  //   VALUES
-  //     ($1, $2)
-  //   INSERT INTO
-  //       book_genres(book_id, genre_id)
-  //   VALUES
-  //     (${book}, ${genre});
-  //   COMMIT
-  // `
-  // const variables = [book.id, author.id, genre.id]
-  // return db.none(sql, variables)
-//}
-
 const associateBookAndGenre = ( book, genre ) => {
   const sql = `
     INSERT INTO
@@ -425,8 +393,6 @@ const getBookWithAuthorsAndGenres = ( bookId ) => {
   })
 
 }
-
-
 
 module.exports = {
   getAllBooks,

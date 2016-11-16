@@ -2,9 +2,9 @@ extends ../layout
 
 block content
   div.contentMargins
-    h2.h2.text-center Your are now editing
+    h2.h2.text-center You're now editing
 
-    form.formHorizontalNew.form-hortizontal(method='post', action=(book.id ? '/books/'+book.id : '/books'))
+    form.formHorizontalNew.form-hortizontal(method='post', action=(book.id ? 'edit' : '/'))
       .form-group
         input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${book.title || ''}`)
 

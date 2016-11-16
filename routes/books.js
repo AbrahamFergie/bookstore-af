@@ -7,7 +7,6 @@ const db = require('../database');
 router.get('/', (req, res) => {
   let page = ( parseInt( req.query.page, 10 ) ) || 1
   db.getAllBooks(page)
-
     .then(books => {
       //db.truncatedDesc(books.description)
       res.render('books', { books, page })
@@ -22,7 +21,6 @@ router.get('/', (req, res) => {
 router.get('/new', (req, res) => {
   res.render('books/new' )
 })
-
 router.post( '/new', (req, res) => {
   const { title, author, genre, description, image } = req.body
 
@@ -42,7 +40,6 @@ router.get('/:bookId', (req, res) => {
   console.log('id of book: '+bookId);
   db.getBookWithAuthorsAndGenres( bookId )
     .then(bookInfo => {
-
       res.render('./details', { bookInfo })
     })
     .catch(error => {
@@ -72,7 +69,9 @@ router.post('/:bookId/edit', (req, res) => {
 
   db.editWholeBook( id, title, author, genre, image, description )
     .then( booksInfo => {
-      res.redirect( `./books/${id}` )
+      res.redirect( `/${id}` )
+      //console.log()
+      res.render('./details', { bookInfo})
     })
     .catch( error => {
       console.log('im an error3!')
@@ -80,6 +79,7 @@ router.post('/:bookId/edit', (req, res) => {
     })
 })
 
+//DELETE
 router.get('/:bookId/delete', (req, res) => {
   const { bookId } = req.params
   db.deleteBook( bookId )
