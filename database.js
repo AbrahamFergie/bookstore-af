@@ -1,8 +1,12 @@
 const pgp = require('pg-promise')()
 const db = pgp({database: 'booky'})
 
+//a function called getAllBooks
 const getAllBooks = ( page = 1 ) => {
+  //creates a constant called offset that sets what the pagination limit is going to be
   const offset = ( page - 1 ) * 10
+  //creates a constant sql that performs a sql query that retrieves all data from table books
+  //orders it in ascending order and references the offset constant
   const sql =`
   SELECT
     *
@@ -12,8 +16,9 @@ const getAllBooks = ( page = 1 ) => {
   LIMIT 10
   OFFSET $1
   `
+  //creates constant that is storing the constant offset that limits what books get returned
   const variables = [offset]
-
+  //returns a promise chain that then combines to a list of books
   return db.manyOrNone( sql, variables ).then( addAuthorsToBooks ).then( addGenresToBooks )
 }
 
@@ -35,7 +40,6 @@ const getBookById = ( id ) => {
       books
     WHERE
       id=${id}`
-  console.log('BookId: ' + id)
   return db.oneOrNone( sql )
 }
 
@@ -94,7 +98,6 @@ const getGenresByBookId = ( id ) => {
 
 const findBooks = ( query, page = 1 ) => {
   const offset = ( page-1 ) * 10
-  console.log('im in findBooks');
   const sql = `
     SELECT DISTINCT
       books.*
@@ -200,8 +203,7 @@ const getGenresForBooks = ( books ) => {
   return db.manyOrNone( sql, [bookIds] )
 }
 
-const createBook = ( title, author,genre,
-  description, image ) => {
+const createBook = ( title, author, genre, description, image ) => {
 
   const sql = `
     INSERT INTO
@@ -284,31 +286,32 @@ const createGenre = ( genreName ) => {
       *
   `
   const variables = [genreName]
-  return db.one( sql, variables )
+  return db.oneOrNone( sql, variables )
 }
 const editAuthor = ( id, author ) => {
   const sql = `
   UPDATE
     authors
-  SET name = '${author}'
+  SET name = $2
   WHERE
     id=(SELECT authors.id FROM authors	JOIN book_authors ON authors.id = book_authors.author_id
-  JOIN books ON book_authors.book_id = books.id WHERE books.id = ${id});
+  JOIN books ON book_authors.book_id = books.id WHERE books.id = $1);
   `
-
-  return db.any( sql )
+  let variables = [ id, author ]
+  return db.none( sql, variables )
 }
 const editGenre = ( id, genre ) => {
 
   const sql = `
   UPDATE
     genres
-  SET name = '${genre}'
+  SET name = $2
   WHERE
     id=(SELECT genres.id FROM genres JOIN book_genres ON genres.id = book_genres.genre_id
-  JOIN books ON book_genres.book_id = books.id WHERE books.id = ${id});
+  JOIN books ON book_genres.book_id = books.id WHERE books.id = $1);
   `
-return db.any( sql )
+  let variables = [ id, genre ]
+  return db.none( sql, variables )
 }
 
 const editBook = ( id, title, image, description  ) => {
@@ -316,23 +319,20 @@ const editBook = ( id, title, image, description  ) => {
   const sql = `
   UPDATE
     books
-  SET title = '${title}', image_url = '${image}', description = '${description}'
+  SET title = $2, image_url = $3, description = $4
   WHERE
-    id=${id};
+    id=$1;
     `
-  console.log('return: ' + sql)
-  return db.any( sql )
+  let variables = [id, title, image, description]
+  return db.none( sql, variables )
 }
 const editWholeBook = ( id, title, author, genre, image, description ) => {
-  console.log( 'HERE!!!!!!!!!!!!!!!!' )
   return Promise.all([
     editBook(id, title, description, image),
     editAuthor(id, author),
     editGenre(id, genre)
-  ]).then(()=> {
-    return true
-  })
-  .catch( error => console.log( 'error!!!!!!!!!!!!!!!!' ) )
+  ])
+  .catch( error => console.log( 'error!!!!!!!!!!!!!!!!',error ) )
 }
 
 const deleteBook = ( bookId ) => {

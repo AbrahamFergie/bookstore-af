@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
   let page = ( parseInt( req.query.page, 10 ) ) || 1
   db.getAllBooks(page)
     .then(books => {
-      //db.truncatedDesc(books.description)
       res.render('books', { books, page })
     })
     .catch(error => {
@@ -23,13 +22,11 @@ router.get('/new', (req, res) => {
 })
 router.post( '/new', (req, res) => {
   const { title, author, genre, description, image } = req.body
-
   db.createBook(title, author, genre, description, image)
     .then(book => {
       res.redirect('/books/' + book.id)
     })
     .catch(error => {
-
       res.render('error', { error })
     })
 })
@@ -37,10 +34,9 @@ router.post( '/new', (req, res) => {
 // Details
 router.get('/:bookId', (req, res) => {
   const { bookId } = req.params
-  console.log('id of book: '+bookId);
   db.getBookWithAuthorsAndGenres( bookId )
     .then(bookInfo => {
-      res.render('./details', { bookInfo })
+      res.render('../views/details', { bookInfo } )
     })
     .catch(error => {
       console.log('im an error2!')
@@ -51,11 +47,9 @@ router.get('/:bookId', (req, res) => {
 //Edit
 router.get('/:bookId/edit', (req, res) => {
   const { bookId } = req.params
-
-  db.getBookById( bookId )
-    .then( book => {
-      console.log('im here')
-      res.render ('books/edit', {book})
+  db.getBookWithAuthorsAndGenres( bookId )
+    .then( bookInfo => {
+      res.render ('books/edit', {bookInfo})
     })
     .catch( error => {
       console.log('im an error4!')
@@ -64,14 +58,12 @@ router.get('/:bookId/edit', (req, res) => {
 })
 
 router.post('/:bookId/edit', (req, res) => {
-  const{ id, title, author, genre, image, description  } = req.body
-  console.log('req.body: ' + req.body.id)
-
-  db.editWholeBook( id, title, author, genre, image, description )
-    .then( booksInfo => {
-      res.redirect( `/${id}` )
-      //console.log()
-      res.render('./details', { bookInfo})
+  const { bookId } = req.params
+  const { id, title, image, description  } = req.body.bookId
+  const { author, genre } = req.body.book
+  db.editWholeBook( bookId, title, author, genre, image, description )
+    .then( bookInfo => {
+      res.redirect( '/books/' + bookId )
     })
     .catch( error => {
       console.log('im an error3!')

@@ -4,21 +4,21 @@ block content
   div.contentMargins
     h2.h2.text-center You're now editing
 
-    form.formHorizontalNew.form-hortizontal(method='post', action=(book.id ? 'edit' : '/'))
+    form.formHorizontalNew.form-hortizontal(method='post', action=(bookInfo.book.id ? 'edit' : '/'))
       .form-group
-        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${book.title || ''}`)
+        input.form-control(type='text', name='bookId[title]', placeholder='Title', value=`${bookInfo.book.title || ''}`)
 
       .form-group
-        input.form-control(type='text', name='book[author]', placeholder='Author', value= `${book.authors || ''}`)
+        input.form-control(type='text', name='book[author]', placeholder='Author', value= `${bookInfo.authors[0].name || ''}`)
 
       .form-group
-        input.form-control(type='text', name='book[genre]', placeholder='Genre', value= `${book.genres || ''}`)
+        input.form-control(type='text', name='book[genre]', placeholder='Genre', value= `${bookInfo.genres[0].name || ''}`)
 
       .form-group
-        textarea.form-control(name='bookId[description]', placeholder='Description', value= `${book.description || ''}`)
+        textarea.form-control(name='bookId[description]', placeholder='Description', value= `${bookInfo.book.description || ''}`)
 
       .form-group
-        input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${book.image_url || ''}`)
+        input.form-control(type='text', name='bookId[image]', placeholder='Image URL', value=`${bookInfo.book.image || ''}`)
 
       .form-group
         button.btn.btn-success(type='submit') Add This Book
