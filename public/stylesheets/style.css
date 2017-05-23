@@ -125,7 +125,6 @@ tr{
   position:absolute;
   text-align:center;
   font-size:2em;
-  margin-top:1em;
 }
 
 #frontpageText video{
@@ -136,6 +135,7 @@ tr{
   z-index:-1;
 }
 hr{
+  border-top: 1px solid #333;
   margin-top:3px;
   margin-bottom:3px;
 }
@@ -171,14 +171,15 @@ tr{
   box-shadow:none;
 }
 #rowSection{
-  margin-top:2em;
-  margin-bottom:3em;
-  width:100%;
+  margin-top: 67em;
+  margin-bottom: 3em;
+  width: 100%;
 }
 .column{
   height:100%;
 }
 .innerColumn{
+  color: white;
   height:100%;
   text-align:center;
 }
@@ -186,7 +187,8 @@ tr{
   font-size:1em;
 }
 .circularImg{
-  background:rgba(0,0,0,0.2);
+  color: white;
+  background:rgba(252,252,252,0.2);
   border-radius:50%;
   height:3em;
   width:3em;
@@ -238,12 +240,12 @@ footer{
   text-align:center;
   padding: 2em 0 1em 0;
 }
-#girlReadingImg{
-  display:none;
-  width:100%;
-  height:10em;
-  margin-left:auto;
-  margin-right:auto;
+#mainbackimage{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* media queries for responsiveness */
 
@@ -524,6 +526,8 @@ footer{
 }
 @media only screen and (min-width:891px){
   #indexTextContent{
+    color: black;
+    margin-top: -5em;
     background-color:transparent;
   }
   video{

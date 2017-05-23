@@ -1,5 +1,6 @@
 const pgp = require('pg-promise')()
-const db = pgp({database: 'booky'})
+const connectionString = process.env.DATABASE_URL || ''
+var db = pgp(process.env.DATABASE_URL || {database: 'booky'})
 
 //a function called getAllBooks
 const getAllBooks = ( page = 1 ) => {

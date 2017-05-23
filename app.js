@@ -3,14 +3,15 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var pg = require('pg');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var books = require('./routes/books');
 var search= require('./routes/search');
-
+// var schema = require('./schema.sql')
+// var bookData = require('./books.sql')
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

@@ -2,17 +2,15 @@ extends layout
 
 block content
   #frontpageText
-    img#girlReadingImg(src='images/girlReadingImg.jpg')
-    img#lotsOfBooksImg(src='images/lotsOfBooks.jpg')
+    img#mainbackimage(src="http://2.bp.blogspot.com/-1qi0aQg93EM/Tc2HYX8MOdI/AAAAAAAAAb8/4O-C1gQn5Is/s1600/helio_remg_a_00040.jpg")
     #indexTextContent
       h1#indexPageHeading Imagine, explore, read
       hr(style='width:6em')
       i.fa.fa-book(aria-hidden='true')
-      hr(style='width:9em;')
+      hr(style='width:9em;padding-bottom:10px;')
       p(style='font-size:0.8em')
         | Booky is the book lovers directory. We're book worms, just like you, and we live to explore and commune with fellow book lovers about the stories and books we love and appreciate. Contribute today by adding some of the books you can't help but share. Happy reading.
   // end of frontpageText section
-  video(src='./video/Reading-4953.mp4', autoplay='true', loop='true', muted='true')
   #rowSection.container
     #indexPageRow.row
       #directoryColumn.column.col-sm-4
@@ -28,7 +26,7 @@ block content
             a(href='/books/new')
               i.fa.fa-book.fa-lg(aria-hidden='true')
           h3 add book
-          p Have a book in mind you'd like to share, take agency, add it.
+          p Have a book in mind youd like to share, take agency, add it.
       #aboutUsColumn.column.col-sm-4
         .innerColumn
           .circularImg

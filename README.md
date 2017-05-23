@@ -1,6 +1,6 @@
 # myBooky
 
-Create a simple content management system that allows users to add, delete, or update books. Books entered in the system can be viewed in a listing, or searched for using basic searches (title, author, genre).
+This a simple content management system that allows users to add, delete, or update books. Books entered in the system can be viewed in a listing, or searched for using basic searches (title, author, genre).
 
 Creating this web application provides exposure to:
 
